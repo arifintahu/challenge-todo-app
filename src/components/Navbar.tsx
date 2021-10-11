@@ -9,6 +9,7 @@ function Navbar() {
         sticky
         top-0
         shadow-md
+        z-10
       ">
       <div 
         className="

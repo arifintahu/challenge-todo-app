@@ -1,4 +1,4 @@
-function ButtonAdd() {
+function ButtonSave() {
     return (
       <button className="
         bg-primary
@@ -8,7 +8,6 @@ function ButtonAdd() {
         active:bg-primary-darken
         active:scale-100
         hover:scale-105
-        shadow-md
       ">
         <div className="
           px-4
@@ -17,12 +16,11 @@ function ButtonAdd() {
           gap-1
           items-center
         ">
-          <div className="text-xl">+</div>
-          <div>Tambah</div>
+          <div>Simpan</div>
         </div>
       </button>
     )
   }
   
-  export default ButtonAdd
+  export default ButtonSave
     

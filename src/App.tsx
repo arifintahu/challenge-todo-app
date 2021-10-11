@@ -5,12 +5,13 @@ import {
 } from 'react-router-dom'
 import Home from './views/Home'
 import Activity from './views/Activity'
+import ActivityNew from './views/ActivityNew'
 import Navbar from './components/Navbar'
 
 function App() {
   return (
     <Router>
-      <Navbar />
+      <Navbar data-cy="navbar"/>
       <div 
         className="
           px-5
@@ -21,10 +22,10 @@ function App() {
         ">
         <Switch>
           <Route exact path="/">
-            <Home />
+            <Home data-cy="view-home"/>
           </Route>
-          <Route path="/activity">
-            <Activity />
+          <Route path="/new">
+            <ActivityNew data-cy="view-activity-new"/>
           </Route>
         </Switch>
       </div>
