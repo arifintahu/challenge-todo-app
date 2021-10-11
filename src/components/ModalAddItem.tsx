@@ -1,12 +1,16 @@
+import IconClose from '../assets/close.svg'
 import ButtonSave from './ButtonSave'
 
-function ModalAddItem() {
+function ModalAddItem(props: any) {
+  function handleClose() {
+    props.onClose(false)
+  }
+
   return (
     <div className="
       absolute
       top-1/4
       left-0
-      h-full
       w-full
       p-5
       z-10
@@ -20,7 +24,14 @@ function ModalAddItem() {
       ">
         <div className="flex justify-between px-5 py-3">
           <div className="font-bold">Tambah List Item</div>
-          <div className="text-xl">X</div>
+          <div onClick={handleClose} className="
+            transform
+            active:scale-100
+            hover:scale-110
+            cursor-pointer
+          ">
+            <img src={IconClose} alt="Close" />
+          </div>
         </div>
         <div className="border-t-2 border-gray-200"/>
         <div className="p-5 flex flex-col gap-5">

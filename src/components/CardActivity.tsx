@@ -1,8 +1,14 @@
 import { useState } from 'react'
 import { Activity } from '../interfaces'
 import IconTrash from '../assets/trash.svg'
+import { removeActivity } from '../api/activity'
 
-function CardActivity(props: { data: Activity }) {
+function CardActivity(props: 
+  {
+    data: Activity,
+    onRemove: Function
+  }
+) {
     const [activity, setActivity ] = useState(props.data)
 
     function getDate(created_at: string): string {
@@ -10,12 +16,17 @@ function CardActivity(props: { data: Activity }) {
       const date = formatDate.getDate()
       const month = formatDate.getMonth()
       const year = formatDate.getFullYear()
-      const months = ['Januari', 'Februari', 'Maret', 'April',
-      'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober',
-      'November', 'Desember'
+      const months = [
+        'Januari', 'Februari', 'Maret', 'April',
+        'Mei', 'Juni', 'Juli', 'Agustus', 'September', 
+        'Oktober', 'November', 'Desember'
       ]
       const fullmonth = months.filter((value, index) => index == month)
       return `${date} ${fullmonth} ${year}`
+    }
+
+    function handleRemove() {
+      props.onRemove(activity)
     }
 
     return (
@@ -41,7 +52,7 @@ function CardActivity(props: { data: Activity }) {
             text-sm
           ">
             <div>{getDate(activity.created_at)}</div>
-            <div className="
+            <div onClick={handleRemove} className="
               transform
               active:scale-100
               hover:scale-110

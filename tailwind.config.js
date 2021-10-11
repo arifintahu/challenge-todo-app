@@ -7,6 +7,7 @@ module.exports = {
         primary: 'var(--color-primary)',
         'primary-darken': 'var(--color-primary-darken)',
         background: 'var(--color-background)',
+        danger: 'var(--color-danger)',
         title: 'var(--color-title)',
         subtitle: 'var(--color-subtitle)',
         white: '#ffffff'

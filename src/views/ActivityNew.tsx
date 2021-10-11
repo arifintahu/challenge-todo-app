@@ -23,6 +23,10 @@ function ActivityNew() {
     }
   }
 
+  function handleModalClose(value: boolean) {
+    setShowModal(value)
+  }
+
   useEffect(() => {
     
   })
@@ -80,7 +84,7 @@ function ActivityNew() {
       </div>
       {
         showModal ?
-        <ModalAddItem />
+        <ModalAddItem onClose={handleModalClose}/>
         :
         ''
       }
