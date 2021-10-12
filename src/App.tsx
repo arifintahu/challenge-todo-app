@@ -4,8 +4,7 @@ import {
   Route
 } from 'react-router-dom'
 import Home from './views/Home'
-import Activity from './views/Activity'
-import ActivityNew from './views/ActivityNew'
+import Detail from './views/Detail'
 import Navbar from './components/Navbar'
 
 function App() {
@@ -24,8 +23,8 @@ function App() {
           <Route exact path="/">
             <Home data-cy="view-home"/>
           </Route>
-          <Route path="/new">
-            <ActivityNew data-cy="view-activity-new"/>
+          <Route path="/detail/:id">
+            <Detail data-cy="view-detail"/>
           </Route>
         </Switch>
       </div>

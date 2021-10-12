@@ -5,7 +5,7 @@ import ImageActivity from '../assets/newactivity.svg'
 import { getActivities, removeActivity, createActivity } from '../api/activity'
 import { useState, useEffect } from 'react'
 import { Activity } from '../interfaces'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import AlertActivity from '../components/AlertActivity'
 import AlertInfo from '../components/AlertInfo'
 
@@ -16,6 +16,8 @@ function Home() {
   const [isAddLoading, setIsAddLoading] = useState<boolean>(false)
   const [activity, setActivity] = useState<Activity>()
 
+  const history = useHistory()
+
   function handleRemoveActivity(activity: Activity) {
     setActivity(activity)
     setShowAlert(true)
@@ -23,6 +25,12 @@ function Home() {
 
   function handleCancelAlert(value: boolean) {
     setShowAlert(value)
+  }
+
+  function handleClickActivity(id: number) {
+    if (id) {
+      history.push(`/detail/${id}`)
+    }
   }
 
   function handleRemoveAlert(value: boolean) {
@@ -100,6 +108,7 @@ function Home() {
                     key={index}
                     data-cy="card-activity"
                     data={item}
+                    onClick={handleClickActivity}
                     onRemove={handleRemoveActivity}
                   />
                 )

@@ -6,7 +6,8 @@ import { removeActivity } from '../api/activity'
 function CardActivity(props: 
   {
     data: Activity,
-    onRemove: Function
+    onRemove: Function,
+    onClick: Function
   }
 ) {
     const [activity, setActivity ] = useState(props.data)
@@ -29,6 +30,10 @@ function CardActivity(props:
       props.onRemove(activity)
     }
 
+    function handleClick() {
+      props.onClick(activity.id)
+    }
+
     return (
       <div className="
         bg-white
@@ -44,7 +49,10 @@ function CardActivity(props:
           justify-between
           h-full
         ">
-          <div className="font-bold">{activity.title}</div>
+          <div 
+            onClick={handleClick}
+            className="font-bold h-full cursor-pointer"
+          >{activity.title}</div>
           <div className="
             flex
             justify-between

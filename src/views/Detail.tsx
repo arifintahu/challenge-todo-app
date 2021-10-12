@@ -1,17 +1,18 @@
 import ButtonAdd from '../components/ButtonAdd'
 import ModalAddItem from '../components/ModalAddItem'
 import ImageNewItem from '../assets/newitem.svg'
-import { createActivity } from '../api/activity'
+import { getDetailActivity } from '../api/activity'
 import { useState, useEffect } from 'react'
 import IconArrowLeft from '../assets/arrow-left.svg'
 import IconPencil from '../assets/pencil.svg'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
-function ActivityNew() {
-  const [activity, setActivity] = useState<string>("New Activity")
+function Detail() {
+  const [activity, setActivity] = useState<string>("")
   const [isActivityUpdate, setIsActivityUpdate] = useState<boolean>(false)
-  const [toDoItems, setToDoItems] = useState([])
+  const [items, setItems] = useState([])
   const [showModal, setShowModal] = useState<boolean>(false)
+  const params: any = useParams()
 
   function handleUpdateActivity(e: any) {
     setActivity(e.target.value)
@@ -27,8 +28,25 @@ function ActivityNew() {
     setShowModal(value)
   }
 
+  function detailActivity() {
+    if (params?.id) {
+      getDetailActivity(params.id)
+      .then(response => {
+        if (response.status == 200) {
+          setActivity(response.data.title)
+          setItems(response.data.todo_items)
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
+  }
+
   useEffect(() => {
-    
+    if (activity === "") {
+      detailActivity()
+    }
   })
 
   return (
@@ -72,7 +90,7 @@ function ActivityNew() {
       </div>
       <div className="w-full mt-10">
         {
-          toDoItems.length ?
+          items.length ?
             <div className="flex flex-wrap gap-4">
               
             </div>
@@ -93,5 +111,5 @@ function ActivityNew() {
   )
 }
 
-export default ActivityNew
+export default Detail
   
