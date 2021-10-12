@@ -1,0 +1,38 @@
+import request from '../lib/request'
+
+export function getItems(id: number): Promise<any> {
+  return request.get(`/todo-items?activity_group_id=${id}`)
+}
+
+export function createItem(
+  data: { 
+    activity_group_id: number,
+    title: string,
+    priority: string
+  }
+): Promise<any> {
+  return request.post('/todo-items', {
+      title: data.title
+  })
+}
+
+export function getDetailItem(id: number): Promise<any> {
+  return request.get(`/todo-items/${id}`)
+}
+
+export function removeItem(id: number): Promise<any> {
+  return request.delete(`/todo-items/${id}`)
+}
+
+export function updateItem(
+  data: { 
+    id: number,
+    title: string,
+    priority: string,
+    is_active: number
+  }
+): Promise<any> {
+  return request.patch(`/activity-groups/${data.id}`, {
+      title: data.title
+  })
+}
