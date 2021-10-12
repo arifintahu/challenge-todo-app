@@ -1,26 +1,28 @@
 import ButtonAdd from '../components/ButtonAdd'
 import ModalAddItem from '../components/ModalAddItem'
+import CardItem from '../components/CardItem'
 import ImageNewItem from '../assets/newitem.svg'
-import { getDetailActivity } from '../api/activity'
+import { getDetailActivity, updateActivity } from '../api/activity'
 import { useState, useEffect } from 'react'
 import IconArrowLeft from '../assets/arrow-left.svg'
 import IconPencil from '../assets/pencil.svg'
 import { Link, useParams } from 'react-router-dom'
 
 function Detail() {
-  const [activity, setActivity] = useState<string>("")
+  const [title, setTitle] = useState<string>("")
   const [isActivityUpdate, setIsActivityUpdate] = useState<boolean>(false)
   const [items, setItems] = useState([])
   const [showModal, setShowModal] = useState<boolean>(false)
   const params: any = useParams()
 
-  function handleUpdateActivity(e: any) {
-    setActivity(e.target.value)
+  function handleUpdateTitle(e: any) {
+    setTitle(e.target.value)
   }
 
-  function handleUpdateActivityEnter(e: any) {
-    if (e.key === 'Enter') {
-        setIsActivityUpdate(false)
+  function handleUpdateActivityDone() {
+    if (isActivityUpdate) {
+      postUpdateActivity()
+      setIsActivityUpdate(false)
     }
   }
 
@@ -28,12 +30,29 @@ function Detail() {
     setShowModal(value)
   }
 
+  function postUpdateActivity() {
+    if (params?.id && title) {
+      updateActivity({
+        id: params?.id,
+        title: title
+      })
+      .then(response => {
+        if (response.status == 200) {
+          console.log('title updated')
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
+  }
+
   function detailActivity() {
     if (params?.id) {
       getDetailActivity(params.id)
       .then(response => {
         if (response.status == 200) {
-          setActivity(response.data.title)
+          setTitle(response.data.title)
           setItems(response.data.todo_items)
         }
       })
@@ -44,7 +63,7 @@ function Detail() {
   }
 
   useEffect(() => {
-    if (activity === "") {
+    if (title === "") {
       detailActivity()
     }
   })
@@ -52,14 +71,15 @@ function Detail() {
   return (
     <div className="mt-5">
       <div className="flex justify-between items-center">
-        <div className="
+        <div onMouseLeave={handleUpdateActivityDone}
+          className="
             font-bold
             text-lg
             lg:text-xl
             flex
             gap-1
             items-center
-        ">
+          ">
             <Link to="/">
                 <img src={IconArrowLeft} alt="Back" />
             </Link>
@@ -67,12 +87,17 @@ function Detail() {
                 isActivityUpdate ?
                 <input
                     type="text"
-                    value={activity}
-                    onChange={handleUpdateActivity}
-                    onKeyDown={handleUpdateActivityEnter}
+                    value={title}
+                    className="
+                      bg-transparent
+                      border-gray-700
+                      border-b-2
+                      focus:outline-none
+                    "
+                    onChange={handleUpdateTitle}
                 ></input>
                 :
-                <div>{activity}</div>
+                <div>{title}</div>
             }
             
             <div onClick={() => setIsActivityUpdate(true)}  className="
@@ -84,15 +109,19 @@ function Detail() {
                 <img src={IconPencil} alt="Edit" />
             </div>
         </div>
-        <div onClick={() => setShowModal(true)}>
-          {/* <ButtonAdd/> */}
-        </div>
+        <ButtonAdd onClick={() => setShowModal(true)}/>
       </div>
       <div className="w-full mt-10">
         {
           items.length ?
-            <div className="flex flex-wrap gap-4">
-              
+            <div className="flex flex-col gap-4">
+              {
+                items.map((item, index) => 
+                  <CardItem 
+                    key={index}
+                  />
+                )
+              }
             </div>
           :
             <div className="flex justify-center mt-10">
@@ -101,10 +130,8 @@ function Detail() {
         }
       </div>
       {
-        showModal ?
+        showModal &&
         <ModalAddItem onClose={handleModalClose}/>
-        :
-        ''
       }
       
     </div>

@@ -121,16 +121,12 @@ function Home() {
         }
       </div>
       {
-        showAlert ?
+        showAlert &&
         <AlertActivity name={activity?.title} onCancel={handleCancelAlert} onRemove={handleRemoveAlert}/>
-        :
-        ''
       }
       {
-        showInfo ?
+        showInfo &&
         <AlertInfo onShow={handleShowInfo} msg="Activity berhasil dihapus"/>
-        :
-        ''
       }
     </div>
   )
