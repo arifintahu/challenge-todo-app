@@ -6,7 +6,7 @@ function Activity() {
     <div className="mt-5">
       <div className="flex justify-between items-center">
         <div className="font-bold lg:text-lg">Activity</div>
-        <ButtonAdd />
+        {/* <ButtonAdd /> */}
       </div>
       <div className="w-full">
         

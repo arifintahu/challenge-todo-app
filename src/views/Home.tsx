@@ -1,15 +1,19 @@
 import ButtonAdd from '../components/ButtonAdd'
+import ButtonLoader from '../components/ButtonLoader'
 import CardActivity from '../components/CardActivity'
 import ImageActivity from '../assets/newactivity.svg'
-import { getActivities, removeActivity } from '../api/activity'
+import { getActivities, removeActivity, createActivity } from '../api/activity'
 import { useState, useEffect } from 'react'
 import { Activity } from '../interfaces'
 import { Link } from 'react-router-dom'
 import AlertActivity from '../components/AlertActivity'
+import AlertInfo from '../components/AlertInfo'
 
 function Home() {
   const [activities, setActivities] = useState<Activity[]>([])
   const [showAlert, setShowAlert] = useState<boolean>(false)
+  const [showInfo, setShowInfo] = useState<boolean>(false)
+  const [isAddLoading, setIsAddLoading] = useState<boolean>(false)
   const [activity, setActivity] = useState<Activity>()
 
   function handleRemoveActivity(activity: Activity) {
@@ -25,16 +29,38 @@ function Home() {
     if (value && activity?.id) {
       removeActivity(activity?.id)
       .then(response => {
-        alert('success')
-        setShowAlert(false)
-        console.log(response.data)
-        getActivityList()
+        if (response.status == 200) {
+          setShowAlert(false)
+          setShowInfo(true)
+          getActivityList()
+        }
       })
       .catch(err => {
         console.log(err)
       })
     }
   }
+
+  function handleShowInfo(value: boolean) {
+    setShowInfo(value)
+  }
+
+  function handleAddActivity() {
+    setIsAddLoading(true)
+    createActivity({
+      title: 'New Activity'
+    })
+    .then(response => {
+      if (response.status == 201) {
+        setIsAddLoading(false)
+        getActivityList()
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
 
   function getActivityList() {
     getActivities()
@@ -56,9 +82,12 @@ function Home() {
     <div className="mt-5">
       <div className="flex justify-between items-center">
         <div className="font-bold text-lg lg:text-xl">Activity</div>
-        <Link to="/new">
-          <ButtonAdd data-cy="button-add-activity"/>
-        </Link>
+        {
+          isAddLoading ?
+          <ButtonLoader />
+          :
+          <ButtonAdd onClick={handleAddActivity} data-cy="button-add-activity"/>
+        }
       </div>
       <div className="w-full mt-10">
         {
@@ -85,6 +114,12 @@ function Home() {
       {
         showAlert ?
         <AlertActivity name={activity?.title} onCancel={handleCancelAlert} onRemove={handleRemoveAlert}/>
+        :
+        ''
+      }
+      {
+        showInfo ?
+        <AlertInfo onShow={handleShowInfo} msg="Activity berhasil dihapus"/>
         :
         ''
       }

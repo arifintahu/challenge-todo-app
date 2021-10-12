@@ -67,7 +67,7 @@ function ActivityNew() {
             </div>
         </div>
         <div onClick={() => setShowModal(true)}>
-          <ButtonAdd/>
+          {/* <ButtonAdd/> */}
         </div>
       </div>
       <div className="w-full mt-10">
