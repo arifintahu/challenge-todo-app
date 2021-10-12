@@ -1,7 +1,35 @@
 import IconTrash from '../assets/trash.svg'
 import IconPencil from '../assets/pencil.svg'
+import { ToDoItem } from '../interfaces'
+import { useState } from 'react'
 
-function CardItem() {
+function CardItem(props: { data: ToDoItem }) {
+  const [item, setItem] = useState<ToDoItem>(props.data)
+
+  function handleCheckbox() {
+    setItem({
+      ... item,
+      is_active: item.is_active == 1 ? 0 : 1
+    })
+  }
+
+  function priorityToColor(priority: string): string {
+    switch(priority) {
+      case 'very-high':
+        return 'bg-red-500'
+      case 'high':
+        return 'bg-orange-500'
+      case 'medium':
+        return 'bg-orange-500'
+      case 'low':
+        return 'bg-orange-500'
+      case 'very-low':
+        return 'bg-orange-500'
+      default:
+        return 'bg-transparent'
+    }
+  }
+
   return (
     <div className="
       bg-white
@@ -14,12 +42,21 @@ function CardItem() {
     ">
       <div className="flex gap-3 items-center">
         <div>
-          <input className="transform scale-150" type="checkbox" value="Bike" />
+          <input 
+            className="transform scale-150"
+            type="checkbox"
+            defaultChecked={item.is_active == 0}
+            onChange={handleCheckbox}
+          />
         </div>
         <div>
-          <div className="bg-black rounded-full w-3 h-3"></div>
+          <div className={`rounded-full w-3 h-3 ${priorityToColor(item.priority)}`}></div>
         </div>
-        <div>Telur ayam</div>
+        {
+          item.is_active ?
+          <div className="font-medium">{item.title}</div> :
+          <div className="line-through text-gray-400">{item.title}</div>
+        }
         <div className="
           transform
           active:scale-100

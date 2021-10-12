@@ -7,11 +7,12 @@ import { useState, useEffect } from 'react'
 import IconArrowLeft from '../assets/arrow-left.svg'
 import IconPencil from '../assets/pencil.svg'
 import { Link, useParams } from 'react-router-dom'
+import { ToDoItem } from '../interfaces'
 
 function Detail() {
   const [title, setTitle] = useState<string>("")
   const [isActivityUpdate, setIsActivityUpdate] = useState<boolean>(false)
-  const [items, setItems] = useState([])
+  const [items, setItems] = useState<ToDoItem[]>([])
   const [showModal, setShowModal] = useState<boolean>(false)
   const params: any = useParams()
 
@@ -119,6 +120,7 @@ function Detail() {
                 items.map((item, index) => 
                   <CardItem 
                     key={index}
+                    data={item}
                   />
                 )
               }
