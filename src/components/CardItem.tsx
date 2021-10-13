@@ -4,7 +4,11 @@ import { ToDoItem } from '../interfaces'
 import { useState } from 'react'
 import ResourcesPriority from '../resources/priority.json'
 
-function CardItem(props: { data: ToDoItem, onChange: Function }) {
+function CardItem(props: { 
+    data: ToDoItem,
+    onChange: Function,
+    onRemove: Function
+  }) {
   const [item, setItem] = useState<ToDoItem>(props.data)
   const [priorities, setPriorities] = useState<Array<any>>(ResourcesPriority.data)
 
@@ -15,6 +19,10 @@ function CardItem(props: { data: ToDoItem, onChange: Function }) {
     }
     setItem(newItem)
     props.onChange(newItem)
+  }
+
+  function handleRemove() {
+    props.onRemove(item)
   }
 
   function priorityToColor(priority: string): string {
@@ -61,7 +69,7 @@ function CardItem(props: { data: ToDoItem, onChange: Function }) {
           <img src={IconPencil} alt="Edit" />
         </div>
       </div>
-      <div className="
+      <div onClick={handleRemove} className="
         transform
         active:scale-100
         hover:scale-110

@@ -3,18 +3,23 @@ import ModalAddItem from '../components/ModalAddItem'
 import CardItem from '../components/CardItem'
 import ImageNewItem from '../assets/newitem.svg'
 import { getDetailActivity, updateActivity } from '../api/activity'
-import { createItem, updateItem } from '../api/item'
+import { createItem, updateItem, removeItem } from '../api/item'
 import { useState, useEffect } from 'react'
 import IconArrowLeft from '../assets/arrow-left.svg'
 import IconPencil from '../assets/pencil.svg'
 import { Link, useParams } from 'react-router-dom'
 import { ToDoItem } from '../interfaces'
+import AlertRemove from '../components/AlertRemove'
+import AlertInfo from '../components/AlertInfo'
 
 function Detail() {
   const [title, setTitle] = useState<string>("")
   const [isActivityUpdate, setIsActivityUpdate] = useState<boolean>(false)
   const [items, setItems] = useState<ToDoItem[]>([])
+  const [item, setItem] = useState<ToDoItem>()
   const [showModal, setShowModal] = useState<boolean>(false)
+  const [showAlert, setShowAlert] = useState<boolean>(false)
+  const [showInfo, setShowInfo] = useState<boolean>(false)
   const params: any = useParams()
 
   function handleUpdateTitle(e: any) {
@@ -35,6 +40,35 @@ function Detail() {
   function handleUpdateCardItem(data: any) {
     if (data) {
       postUpdateItem(data)
+    }
+  }
+
+  function handleCancelAlert(value: boolean) {
+    setShowAlert(value)
+  }
+
+  function handleShowInfo(value: boolean) {
+    setShowInfo(value)
+  }
+
+  function handleRemoveCardItem(data: ToDoItem) {
+    setItem(data)
+    setShowAlert(true)
+  }
+
+  function handleRemoveAlert(value: boolean) {
+    if (value && item?.id) {
+      removeItem(item?.id)
+      .then(response => {
+        if (response.status == 200) {
+          setShowAlert(false)
+          setShowInfo(true)
+          detailActivity()
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
     }
   }
 
@@ -168,6 +202,7 @@ function Detail() {
                     key={index}
                     data={item}
                     onChange={handleUpdateCardItem}
+                    onRemove={handleRemoveCardItem}
                   />
                 )
               }
@@ -182,7 +217,14 @@ function Detail() {
         showModal &&
         <ModalAddItem onClose={handleModalClose} onSave={handleModalSave}/>
       }
-      
+      {
+        showAlert &&
+        <AlertRemove type="item" name={item?.title} onCancel={handleCancelAlert} onRemove={handleRemoveAlert}/>
+      }
+      {
+        showInfo &&
+        <AlertInfo onShow={handleShowInfo} msg="Item berhasil dihapus"/>
+      }
     </div>
   )
 }

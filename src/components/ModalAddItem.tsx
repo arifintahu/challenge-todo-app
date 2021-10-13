@@ -7,6 +7,7 @@ function ModalAddItem(props: any) {
   const [priorities, setPriorities] = useState<Array<any>>(ResourcesPriority.data)
   const [priority, setPriority] = useState<string>("very-high")
   const [title, setTitle] = useState<string>("")
+  const [isDisabled, setIsDisabled] = useState<boolean>(true)
 
   function handleClose() {
     props.onClose(false)
@@ -18,6 +19,7 @@ function ModalAddItem(props: any) {
 
   function handleTitle(e: any) {
     setTitle(e.target.value)
+    setIsDisabled(e.target.value == "")
   }
 
   function handleSave() {
@@ -89,7 +91,7 @@ function ModalAddItem(props: any) {
         </div>
         <div className="border-t-2 border-gray-200"/>
         <div className="px-5 py-3 flex justify-end">
-          <ButtonSave onClick={handleSave}/>
+          <ButtonSave onClick={handleSave} disabled={isDisabled}/>
         </div>
       </div>
     </div>

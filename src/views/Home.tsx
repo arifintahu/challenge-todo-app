@@ -6,7 +6,7 @@ import { getActivities, removeActivity, createActivity } from '../api/activity'
 import { useState, useEffect } from 'react'
 import { Activity } from '../interfaces'
 import { Link, useHistory } from 'react-router-dom'
-import AlertActivity from '../components/AlertActivity'
+import AlertRemove from '../components/AlertRemove'
 import AlertInfo from '../components/AlertInfo'
 
 function Home() {
@@ -18,8 +18,8 @@ function Home() {
 
   const history = useHistory()
 
-  function handleRemoveActivity(activity: Activity) {
-    setActivity(activity)
+  function handleRemoveActivity(data: Activity) {
+    setActivity(data)
     setShowAlert(true)
   }
 
@@ -122,7 +122,7 @@ function Home() {
       </div>
       {
         showAlert &&
-        <AlertActivity name={activity?.title} onCancel={handleCancelAlert} onRemove={handleRemoveAlert}/>
+        <AlertRemove type="activity" name={activity?.title} onCancel={handleCancelAlert} onRemove={handleRemoveAlert}/>
       }
       {
         showInfo &&

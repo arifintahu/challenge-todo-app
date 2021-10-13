@@ -1,11 +1,12 @@
-function ButtonAdd(props: { onClick: Function}) {
-
+function ButtonAdd(props: { onClick: Function }) {
   function handleClick(event: React.MouseEvent<HTMLElement>) {
     props.onClick(event)
   }
 
   return (
-    <button onClick={handleClick} className="
+    <button 
+      onClick={handleClick} 
+      className="
       bg-primary
       text-white
       rounded-3xl
