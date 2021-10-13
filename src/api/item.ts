@@ -34,7 +34,9 @@ export function updateItem(
     is_active: number
   }
 ): Promise<any> {
-  return request.patch(`/activity-groups/${data.id}`, {
-      title: data.title
+  return request.patch(`/todo-items/${data.id}`, {
+      title: data.title,
+      priority: data.priority,
+      is_active: data.is_active
   })
 }

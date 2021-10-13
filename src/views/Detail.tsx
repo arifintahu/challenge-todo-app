@@ -3,7 +3,7 @@ import ModalAddItem from '../components/ModalAddItem'
 import CardItem from '../components/CardItem'
 import ImageNewItem from '../assets/newitem.svg'
 import { getDetailActivity, updateActivity } from '../api/activity'
-import { createItem } from '../api/item'
+import { createItem, updateItem } from '../api/item'
 import { useState, useEffect } from 'react'
 import IconArrowLeft from '../assets/arrow-left.svg'
 import IconPencil from '../assets/pencil.svg'
@@ -30,6 +30,12 @@ function Detail() {
 
   function handleModalClose(value: boolean) {
     setShowModal(value)
+  }
+
+  function handleUpdateCardItem(data: any) {
+    if (data) {
+      postUpdateItem(data)
+    }
   }
 
   function handleModalSave(data : 
@@ -62,13 +68,30 @@ function Detail() {
       })
       .then(response => {
         if (response.status == 200) {
-          console.log('title updated')
+          console.log('activity updated')
         }
       })
       .catch(err => {
         console.log(err)
       })
     }
+  }
+
+  function postUpdateItem(data: {
+    id: number,
+    title: string,
+    priority: string,
+    is_active: number
+  }) {
+    updateItem(data)
+    .then(response => {
+      if (response.status == 200) {
+        console.log('item updated')
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 
   function detailActivity() {
@@ -144,6 +167,7 @@ function Detail() {
                   <CardItem 
                     key={index}
                     data={item}
+                    onChange={handleUpdateCardItem}
                   />
                 )
               }

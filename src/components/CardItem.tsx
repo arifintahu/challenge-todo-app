@@ -4,15 +4,17 @@ import { ToDoItem } from '../interfaces'
 import { useState } from 'react'
 import ResourcesPriority from '../resources/priority.json'
 
-function CardItem(props: { data: ToDoItem }) {
+function CardItem(props: { data: ToDoItem, onChange: Function }) {
   const [item, setItem] = useState<ToDoItem>(props.data)
   const [priorities, setPriorities] = useState<Array<any>>(ResourcesPriority.data)
 
   function handleCheckbox() {
-    setItem({
+    const newItem = {
       ... item,
       is_active: item.is_active == 1 ? 0 : 1
-    })
+    }
+    setItem(newItem)
+    props.onChange(newItem)
   }
 
   function priorityToColor(priority: string): string {
