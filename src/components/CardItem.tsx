@@ -2,9 +2,11 @@ import IconTrash from '../assets/trash.svg'
 import IconPencil from '../assets/pencil.svg'
 import { ToDoItem } from '../interfaces'
 import { useState } from 'react'
+import ResourcesPriority from '../resources/priority.json'
 
 function CardItem(props: { data: ToDoItem }) {
   const [item, setItem] = useState<ToDoItem>(props.data)
+  const [priorities, setPriorities] = useState<Array<any>>(ResourcesPriority.data)
 
   function handleCheckbox() {
     setItem({
@@ -14,20 +16,11 @@ function CardItem(props: { data: ToDoItem }) {
   }
 
   function priorityToColor(priority: string): string {
-    switch(priority) {
-      case 'very-high':
-        return 'bg-red-500'
-      case 'high':
-        return 'bg-orange-500'
-      case 'medium':
-        return 'bg-orange-500'
-      case 'low':
-        return 'bg-orange-500'
-      case 'very-low':
-        return 'bg-orange-500'
-      default:
-        return 'bg-transparent'
+    const result = priorities.find(value => value.priority == priority)
+    if (!result) {
+      return 'bg-transparent'
     }
+    return result.color
   }
 
   return (

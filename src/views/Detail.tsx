@@ -3,6 +3,7 @@ import ModalAddItem from '../components/ModalAddItem'
 import CardItem from '../components/CardItem'
 import ImageNewItem from '../assets/newitem.svg'
 import { getDetailActivity, updateActivity } from '../api/activity'
+import { createItem } from '../api/item'
 import { useState, useEffect } from 'react'
 import IconArrowLeft from '../assets/arrow-left.svg'
 import IconPencil from '../assets/pencil.svg'
@@ -29,6 +30,28 @@ function Detail() {
 
   function handleModalClose(value: boolean) {
     setShowModal(value)
+  }
+
+  function handleModalSave(data : 
+    { title: string, priority: string }
+  ) {
+    const { title, priority } = data
+    if (params?.id && title && priority) {
+      createItem({
+        activity_group_id: params?.id,
+        title: title,
+        priority: priority
+      })
+      .then(response => {
+        if (response.status == 201) {
+          detailActivity()
+          setShowModal(false)
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
   }
 
   function postUpdateActivity() {
@@ -133,7 +156,7 @@ function Detail() {
       </div>
       {
         showModal &&
-        <ModalAddItem onClose={handleModalClose}/>
+        <ModalAddItem onClose={handleModalClose} onSave={handleModalSave}/>
       }
       
     </div>

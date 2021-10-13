@@ -1,0 +1,29 @@
+{
+  "data": [
+    {
+      "name": "Very High",
+      "priority": "very-high",
+      "color": "bg-red-500"
+    },
+    {
+      "name": "High",
+      "priority": "high",
+      "color": "bg-orange-500"
+    },
+    {
+      "name": "Medium",
+      "priority": "normal",
+      "color": "bg-green-500"
+    },
+    {
+      "name": "Low",
+      "priority": "low",
+      "color": "bg-blue-500"
+    },
+    {
+      "name": "Very Low",
+      "priority": "very-low",
+      "color": "bg-purple-500"
+    }
+  ]
+}

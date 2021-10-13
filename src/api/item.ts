@@ -12,7 +12,9 @@ export function createItem(
   }
 ): Promise<any> {
   return request.post('/todo-items', {
-      title: data.title
+    activity_group_id: data.activity_group_id,
+    title: data.title,
+    priority: data.priority
   })
 }
 
