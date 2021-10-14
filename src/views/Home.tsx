@@ -1,11 +1,13 @@
+import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+
+import { getActivities, removeActivity, createActivity } from '../api/activity';
+import ImageActivity from '../assets/newactivity.svg';
+import { Activity } from '../interfaces';
+
 import ButtonAdd from '../components/ButtonAdd';
 import ButtonLoader from '../components/ButtonLoader';
 import CardActivity from '../components/CardActivity';
-import ImageActivity from '../assets/newactivity.svg';
-import { getActivities, removeActivity, createActivity } from '../api/activity';
-import { useState, useEffect } from 'react';
-import { Activity } from '../interfaces';
-import { Link, useHistory } from 'react-router-dom';
 import AlertRemove from '../components/AlertRemove';
 import AlertInfo from '../components/AlertInfo';
 import Loader from '../components/Loader';
@@ -73,6 +75,7 @@ function Home() {
 
   function getActivityList() {
     setIsLoading(true);
+    setActivities([]);
     getActivities()
       .then((response) => {
         setActivities(response.data.data);
@@ -84,10 +87,8 @@ function Home() {
   }
 
   useEffect(() => {
-    if (!activities.length) {
-      getActivityList();
-    }
-  });
+    getActivityList();
+  }, []);
 
   return (
     <div className="mt-5">

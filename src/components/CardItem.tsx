@@ -1,7 +1,8 @@
+import { useState } from 'react';
+
 import IconTrash from '../assets/trash.svg';
 import IconPencil from '../assets/pencil.svg';
 import { ToDoItem } from '../interfaces';
-import { useEffect, useState } from 'react';
 import ResourcesPriority from '../resources/priority.json';
 
 function CardItem(props: {
@@ -15,9 +16,13 @@ function CardItem(props: {
 
   function handleCheckbox() {
     const newItem = {
-      ...item,
+      id: item.id,
+      title: item.title,
+      priority: item.priority,
+      activity_group_id: item.activity_group_id,
       is_active: item.is_active == 1 ? 0 : 1
     };
+    console.log(newItem)
     setItem(newItem);
     props.onChange(newItem);
   }
@@ -37,10 +42,6 @@ function CardItem(props: {
     }
     return result.color;
   }
-
-  useEffect(() => {
-    setItem(props.data);
-  });
 
   return (
     <div

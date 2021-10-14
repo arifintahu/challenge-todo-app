@@ -1,7 +1,8 @@
 import Axios, { AxiosInstance } from 'axios';
+import { API_URL } from '../constants'
 
 const instance: AxiosInstance = Axios.create({
-  baseURL: 'https://api.todo.dev.gethired.id'
+  baseURL: API_URL
 });
 
 export default instance;

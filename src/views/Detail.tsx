@@ -1,18 +1,22 @@
+import { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+
+import { getDetailActivity, updateActivity } from '../api/activity';
+import { createItem, updateItem, removeItem } from '../api/item';
+
+import ImageNewItem from '../assets/newitem.svg';
+import IconArrowLeft from '../assets/arrow-left.svg';
+import IconPencil from '../assets/pencil.svg';
+
+import { ToDoItem } from '../interfaces';
+
+import AlertRemove from '../components/AlertRemove';
+import AlertInfo from '../components/AlertInfo';
+import Loader from '../components/Loader';
 import ButtonAdd from '../components/ButtonAdd';
 import ModalAddItem from '../components/ModalAddItem';
 import ModalUpdateItem from '../components/ModalUpdateItem';
 import CardItem from '../components/CardItem';
-import ImageNewItem from '../assets/newitem.svg';
-import { getDetailActivity, updateActivity } from '../api/activity';
-import { createItem, updateItem, removeItem } from '../api/item';
-import { useState, useEffect } from 'react';
-import IconArrowLeft from '../assets/arrow-left.svg';
-import IconPencil from '../assets/pencil.svg';
-import { Link, useParams } from 'react-router-dom';
-import { ToDoItem } from '../interfaces';
-import AlertRemove from '../components/AlertRemove';
-import AlertInfo from '../components/AlertInfo';
-import Loader from '../components/Loader';
 
 function Detail() {
   const [title, setTitle] = useState<string>('');
@@ -166,6 +170,7 @@ function Detail() {
 
   function detailActivity() {
     setIsLoading(true);
+    setItems([])
     if (params?.id) {
       getDetailActivity(params.id)
         .then((response) => {
@@ -182,10 +187,8 @@ function Detail() {
   }
 
   useEffect(() => {
-    if (title === '') {
-      detailActivity();
-    }
-  });
+    detailActivity();
+  }, []);
 
   return (
     <div className="mt-5">

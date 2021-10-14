@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Activity } from '../interfaces';
 import IconTrash from '../assets/trash.svg';
-import { removeActivity } from '../api/activity';
+import ResourcesMonths from '../resources/months.json';
 
 function CardActivity(props: { data: Activity; onRemove: Function; onClick: Function }) {
   const [activity, setActivity] = useState(props.data);
@@ -11,20 +11,7 @@ function CardActivity(props: { data: Activity; onRemove: Function; onClick: Func
     const date = formatDate.getDate();
     const month = formatDate.getMonth();
     const year = formatDate.getFullYear();
-    const months = [
-      'Januari',
-      'Februari',
-      'Maret',
-      'April',
-      'Mei',
-      'Juni',
-      'Juli',
-      'Agustus',
-      'September',
-      'Oktober',
-      'November',
-      'Desember'
-    ];
+    const months = ResourcesMonths.data;
     const fullmonth = months.filter((value, index) => index == month);
     return `${date} ${fullmonth} ${year}`;
   }
@@ -36,10 +23,6 @@ function CardActivity(props: { data: Activity; onRemove: Function; onClick: Func
   function handleClick() {
     props.onClick(activity.id);
   }
-
-  useEffect(() => {
-    setActivity(props.data);
-  });
 
   return (
     <div
