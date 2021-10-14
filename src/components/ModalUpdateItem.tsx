@@ -3,11 +3,11 @@ import IconClose from '../assets/close.svg'
 import ButtonSave from './ButtonSave'
 import ResourcesPriority from '../resources/priority.json'
 
-function ModalAddItem(props: any) {
+function ModalUpdateItem(props: any) {
   const [priorities, setPriorities] = useState<Array<any>>(ResourcesPriority.data)
-  const [priority, setPriority] = useState<string>("very-high")
-  const [title, setTitle] = useState<string>("")
-  const [isDisabled, setIsDisabled] = useState<boolean>(true)
+  const [priority, setPriority] = useState<string>(props.item.priority)
+  const [title, setTitle] = useState<string>(props.item.title)
+  const [isDisabled, setIsDisabled] = useState<boolean>(false)
 
   function handleClose() {
     props.onClose(false)
@@ -25,8 +25,10 @@ function ModalAddItem(props: any) {
   function handleSave() {
     if (priority && title) {
       props.onSave({
+        id: props.item.id,
         title: title,
-        priority: priority
+        priority: priority,
+        is_active: props.item.is_active
       })
     }
   }
@@ -51,7 +53,7 @@ function ModalAddItem(props: any) {
         max-w-xl
       ">
         <div className="flex justify-between px-5 py-3">
-          <div className="font-bold">Tambah List Item</div>
+          <div className="font-bold">Update Item</div>
           <div onClick={handleClose} className="
             transform
             active:scale-100
@@ -98,5 +100,5 @@ function ModalAddItem(props: any) {
   )
 }
   
-export default ModalAddItem
+export default ModalUpdateItem
     

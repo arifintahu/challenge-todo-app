@@ -1,5 +1,6 @@
 import ButtonAdd from '../components/ButtonAdd'
 import ModalAddItem from '../components/ModalAddItem'
+import ModalUpdateItem from '../components/ModalUpdateItem'
 import CardItem from '../components/CardItem'
 import ImageNewItem from '../assets/newitem.svg'
 import { getDetailActivity, updateActivity } from '../api/activity'
@@ -17,7 +18,8 @@ function Detail() {
   const [isActivityUpdate, setIsActivityUpdate] = useState<boolean>(false)
   const [items, setItems] = useState<ToDoItem[]>([])
   const [item, setItem] = useState<ToDoItem>()
-  const [showModal, setShowModal] = useState<boolean>(false)
+  const [showModalAdd, setShowModalAdd] = useState<boolean>(false)
+  const [showModalEdit, setShowModalEdit] = useState<boolean>(false)
   const [showAlert, setShowAlert] = useState<boolean>(false)
   const [showInfo, setShowInfo] = useState<boolean>(false)
   const params: any = useParams()
@@ -34,13 +36,11 @@ function Detail() {
   }
 
   function handleModalClose(value: boolean) {
-    setShowModal(value)
+    setShowModalAdd(value)
   }
 
-  function handleUpdateCardItem(data: any) {
-    if (data) {
-      postUpdateItem(data)
-    }
+  function handleModalEditClose(value: boolean) {
+    setShowModalEdit(value)
   }
 
   function handleCancelAlert(value: boolean) {
@@ -54,6 +54,19 @@ function Detail() {
   function handleRemoveCardItem(data: ToDoItem) {
     setItem(data)
     setShowAlert(true)
+  }
+
+  function handleUpdateCardItem(data: any) {
+    if (data) {
+      postUpdateItem(data)
+    }
+  }
+
+  function handleEditCardItem(data: ToDoItem) {
+    if (data) {
+      setItem(data)
+      setShowModalEdit(true)
+    }
   }
 
   function handleRemoveAlert(value: boolean) {
@@ -72,6 +85,24 @@ function Detail() {
     }
   }
 
+  function handleModalEditSave(data : {
+    id: number,
+    title: string,
+    priority: string,
+    is_active: number
+  }) {
+    updateItem(data)
+    .then(response => {
+      if (response.status == 200) {
+        setShowModalEdit(false)
+        detailActivity()
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
   function handleModalSave(data : 
     { title: string, priority: string }
   ) {
@@ -85,7 +116,7 @@ function Detail() {
       .then(response => {
         if (response.status == 201) {
           detailActivity()
-          setShowModal(false)
+          setShowModalAdd(false)
         }
       })
       .catch(err => {
@@ -190,7 +221,7 @@ function Detail() {
                 <img src={IconPencil} alt="Edit" />
             </div>
         </div>
-        <ButtonAdd onClick={() => setShowModal(true)}/>
+        <ButtonAdd onClick={() => setShowModalAdd(true)}/>
       </div>
       <div className="w-full mt-10">
         {
@@ -203,6 +234,7 @@ function Detail() {
                     data={item}
                     onChange={handleUpdateCardItem}
                     onRemove={handleRemoveCardItem}
+                    onEdit={handleEditCardItem}
                   />
                 )
               }
@@ -214,8 +246,12 @@ function Detail() {
         }
       </div>
       {
-        showModal &&
+        showModalAdd &&
         <ModalAddItem onClose={handleModalClose} onSave={handleModalSave}/>
+      }
+      {
+        showModalEdit &&
+        <ModalUpdateItem item={item} onClose={handleModalEditClose} onSave={handleModalEditSave}/>
       }
       {
         showAlert &&

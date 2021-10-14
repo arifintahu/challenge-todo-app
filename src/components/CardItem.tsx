@@ -7,7 +7,8 @@ import ResourcesPriority from '../resources/priority.json'
 function CardItem(props: { 
     data: ToDoItem,
     onChange: Function,
-    onRemove: Function
+    onRemove: Function,
+    onEdit: Function
   }) {
   const [item, setItem] = useState<ToDoItem>(props.data)
   const [priorities, setPriorities] = useState<Array<any>>(ResourcesPriority.data)
@@ -23,6 +24,10 @@ function CardItem(props: {
 
   function handleRemove() {
     props.onRemove(item)
+  }
+
+  function handleEdit() {
+    props.onEdit(item)
   }
 
   function priorityToColor(priority: string): string {
@@ -60,7 +65,7 @@ function CardItem(props: {
           <div className="font-medium">{item.title}</div> :
           <div className="line-through text-gray-400">{item.title}</div>
         }
-        <div className="
+        <div onClick={handleEdit} className="
           transform
           active:scale-100
           hover:scale-110
