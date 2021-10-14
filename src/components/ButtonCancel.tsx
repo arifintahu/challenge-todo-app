@@ -10,7 +10,7 @@ function ButtonCancel(props: { onClick: Function }) {
       bg-background
       text-title
       rounded-3xl
-      w-24
+      w-32
       transform
       active:scale-100
       hover:scale-105

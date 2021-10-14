@@ -10,7 +10,7 @@ function ButtonRemove(props: { onClick: Function }) {
       bg-danger
       text-white
       rounded-3xl
-      w-24
+      w-32
       transform
       active:scale-100
       hover:scale-105

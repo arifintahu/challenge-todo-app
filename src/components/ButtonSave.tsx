@@ -14,6 +14,7 @@ function ButtonSave(props: { onClick: Function; disabled: boolean }) {
           text-white
           rounded-3xl
           transform
+          w-32
           ${!disabled && 'active:bg-primary-darken active:scale-100 hover:scale-105'}
           ${disabled && 'cursor-default opacity-30'}
         `}
@@ -24,6 +25,7 @@ function ButtonSave(props: { onClick: Function; disabled: boolean }) {
         py-2
         flex
         gap-1
+        justify-center
         items-center
       "
       >

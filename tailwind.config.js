@@ -1,5 +1,10 @@
 module.exports = {
-  purge: ['./src/**/*.{js,jsx,ts,tsx}', './index.html'],
+  purge: {
+    content: ['./src/**/*.{js,jsx,ts,tsx}', './index.html'],
+    options: {
+      safelist: ['bg-red-500', 'bg-yellow-500', 'bg-green-500', 'bg-blue-500', 'bg-purple-500']
+    }
+  },
   darkMode: false,
   theme: {
     extend: {

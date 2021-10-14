@@ -6,7 +6,7 @@ function ButtonLoader() {
       bg-primary
       text-white
       rounded-3xl
-      w-24
+      w-32
       shadow-md
     "
     >

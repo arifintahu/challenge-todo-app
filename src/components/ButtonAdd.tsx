@@ -12,7 +12,7 @@ function ButtonAdd(props: { onClick: Function }) {
       text-white
       rounded-3xl
       transform
-      w-24
+      w-32
       active:bg-primary-darken
       active:scale-100
       hover:scale-105
