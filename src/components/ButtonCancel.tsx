@@ -1,9 +1,9 @@
-function ButtonCancel(props: { onClick: Function}) {
+function ButtonCancel(props: { onClick: Function }) {
   function handleClick(event: React.MouseEvent<HTMLElement>) {
-    props.onClick(event)
+    props.onClick(event);
   }
   return (
-    <button 
+    <button
       data-cy="button-cancel"
       onClick={handleClick}
       className="
@@ -14,20 +14,22 @@ function ButtonCancel(props: { onClick: Function}) {
       transform
       active:scale-100
       hover:scale-105
-    ">
-      <div className="
+    "
+    >
+      <div
+        className="
         px-4
         py-2
         flex
         gap-1
         justify-center
         items-center
-      ">
+      "
+      >
         <div>Batal</div>
       </div>
     </button>
-  )
+  );
 }
 
-export default ButtonCancel
-    
+export default ButtonCancel;

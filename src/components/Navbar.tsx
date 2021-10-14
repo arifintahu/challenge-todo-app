@@ -1,6 +1,6 @@
 function Navbar() {
   return (
-    <div 
+    <div
       data-cy="navbar"
       className="
         w-full
@@ -11,8 +11,9 @@ function Navbar() {
         top-0
         shadow-md
         z-10
-      ">
-      <div 
+      "
+    >
+      <div
         className="
           px-5
           w-full
@@ -22,12 +23,12 @@ function Navbar() {
           font-bold
           text-white
           lg:text-lg
-        ">
+        "
+      >
         TO DO LIST APP
       </div>
     </div>
-  )
+  );
 }
 
-export default Navbar
-  
+export default Navbar;

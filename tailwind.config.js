@@ -11,14 +11,14 @@ module.exports = {
         title: 'var(--color-title)',
         subtitle: 'var(--color-subtitle)',
         white: '#ffffff'
-      },
-    },
+      }
+    }
   },
   variants: {
     extend: {
       backgroundColor: ['active'],
-      scale: ['active'],
-    },
+      scale: ['active']
+    }
   },
-  plugins: [],
-}
+  plugins: []
+};

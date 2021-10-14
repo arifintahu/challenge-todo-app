@@ -1,12 +1,15 @@
-import IconInfo from '../assets/info.svg'
+import IconInfo from '../assets/info.svg';
 
 function AlertInfo(props: any) {
   function handleClose() {
-    props.onShow(false)
+    props.onShow(false);
   }
 
   return (
-    <div data-cy="alert-info" onClick={handleClose} className="
+    <div
+      data-cy="alert-info"
+      onClick={handleClose}
+      className="
       absolute
       top-0
       left-0
@@ -18,26 +21,26 @@ function AlertInfo(props: any) {
       bg-opacity-25
       flex
       items-center
-    ">
-      <div className="
+    "
+    >
+      <div
+        className="
         bg-white
         rounded-lg
         shadow-md
         m-auto
         max-w-lg
-      ">
+      "
+      >
         <div className="px-5 py-5 flex gap-3">
           <div>
             <img src={IconInfo} alt="Info" />
           </div>
-          <div>
-            {props.msg}
-          </div>
+          <div>{props.msg}</div>
         </div>
       </div>
     </div>
-  )
+  );
 }
-  
-export default AlertInfo
-    
+
+export default AlertInfo;

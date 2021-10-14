@@ -1,18 +1,20 @@
-import IconAlert from '../assets/alert.svg'
-import ButtonCancel from './ButtonCancel'
-import ButtonRemove from './ButtonRemove'
+import IconAlert from '../assets/alert.svg';
+import ButtonCancel from './ButtonCancel';
+import ButtonRemove from './ButtonRemove';
 
 function AlertRemove(props: any) {
   function handleCancel() {
-    props.onCancel(false)
+    props.onCancel(false);
   }
 
   function handleRemove() {
-    props.onRemove(true)
+    props.onRemove(true);
   }
 
   return (
-    <div data-cy="alert-remove" className="
+    <div
+      data-cy="alert-remove"
+      className="
       absolute
       top-0
       left-0
@@ -24,14 +26,17 @@ function AlertRemove(props: any) {
       bg-opacity-25
       flex
       items-center
-    ">
-      <div className="
+    "
+    >
+      <div
+        className="
         bg-white
         rounded-lg
         shadow-md
         m-auto
         max-w-md
-      ">
+      "
+      >
         <div className="px-10 py-10 flex flex-col items-center">
           <div>
             <img src={IconAlert} alt="Alert" />
@@ -41,14 +46,13 @@ function AlertRemove(props: any) {
             <span className="font-bold"> "{props.name}"?</span>
           </div>
           <div className="flex gap-3">
-            <ButtonCancel onClick={handleCancel}/>
-            <ButtonRemove onClick={handleRemove}/>
+            <ButtonCancel onClick={handleCancel} />
+            <ButtonRemove onClick={handleRemove} />
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
-  
-export default AlertRemove
-    
+
+export default AlertRemove;
