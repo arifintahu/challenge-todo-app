@@ -8,12 +8,14 @@ import { Activity } from '../interfaces'
 import { Link, useHistory } from 'react-router-dom'
 import AlertRemove from '../components/AlertRemove'
 import AlertInfo from '../components/AlertInfo'
+import Loader from '../components/Loader'
 
 function Home() {
   const [activities, setActivities] = useState<Activity[]>([])
   const [showAlert, setShowAlert] = useState<boolean>(false)
   const [showInfo, setShowInfo] = useState<boolean>(false)
   const [isAddLoading, setIsAddLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [activity, setActivity] = useState<Activity>()
 
   const history = useHistory()
@@ -71,9 +73,11 @@ function Home() {
 
 
   function getActivityList() {
+    setIsLoading(true)
     getActivities()
       .then(response => {
         setActivities(response.data.data)
+        setIsLoading(false)
       })
       .catch(err => {
         console.log(err)
@@ -97,15 +101,18 @@ function Home() {
           <ButtonAdd onClick={handleAddActivity} data-cy="button-add-activity"/>
         }
       </div>
-      <div className="w-full mt-10">
+      <div className={`w-full h-72 flex justify-center items-center ${!isLoading && 'hidden'}`}>
+        <Loader/>
+      </div>
+      <div className={`w-full mt-10 ${isLoading && 'hidden'}`}>
         {
           activities.length ?
             <div className="flex flex-wrap gap-4">
               {
                 activities.map(
-                  (item, index) => 
+                  (item) => 
                   <CardActivity 
-                    key={index}
+                    key={item.id}
                     data-cy="card-activity"
                     data={item}
                     onClick={handleClickActivity}

@@ -1,6 +1,7 @@
 function Navbar() {
   return (
     <div 
+      data-cy="navbar"
       className="
         w-full
         py-5

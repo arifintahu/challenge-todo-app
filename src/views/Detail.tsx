@@ -12,6 +12,7 @@ import { Link, useParams } from 'react-router-dom'
 import { ToDoItem } from '../interfaces'
 import AlertRemove from '../components/AlertRemove'
 import AlertInfo from '../components/AlertInfo'
+import Loader from '../components/Loader'
 
 function Detail() {
   const [title, setTitle] = useState<string>("")
@@ -22,6 +23,8 @@ function Detail() {
   const [showModalEdit, setShowModalEdit] = useState<boolean>(false)
   const [showAlert, setShowAlert] = useState<boolean>(false)
   const [showInfo, setShowInfo] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isButtonLoading, setIsButtonLoading] = useState<boolean>(false)
   const params: any = useParams()
 
   function handleUpdateTitle(e: any) {
@@ -91,10 +94,12 @@ function Detail() {
     priority: string,
     is_active: number
   }) {
+    setIsButtonLoading(true)
     updateItem(data)
     .then(response => {
       if (response.status == 200) {
         setShowModalEdit(false)
+        setIsButtonLoading(false)
         detailActivity()
       }
     })
@@ -108,6 +113,7 @@ function Detail() {
   ) {
     const { title, priority } = data
     if (params?.id && title && priority) {
+      setIsButtonLoading(true)
       createItem({
         activity_group_id: params?.id,
         title: title,
@@ -116,6 +122,7 @@ function Detail() {
       .then(response => {
         if (response.status == 201) {
           detailActivity()
+          setIsButtonLoading(false)
           setShowModalAdd(false)
         }
       })
@@ -160,10 +167,12 @@ function Detail() {
   }
 
   function detailActivity() {
+    setIsLoading(true)
     if (params?.id) {
       getDetailActivity(params.id)
       .then(response => {
         if (response.status == 200) {
+          setIsLoading(false)
           setTitle(response.data.title)
           setItems(response.data.todo_items)
         }
@@ -212,25 +221,31 @@ function Detail() {
                 <div>{title}</div>
             }
             
-            <div onClick={() => setIsActivityUpdate(true)}  className="
-              transform
-              active:scale-100
-              hover:scale-110
-              cursor-pointer
-            ">
-                <img src={IconPencil} alt="Edit" />
+            <div onClick={() => setIsActivityUpdate(true)}
+              className={`
+                transform
+                active:scale-100
+                hover:scale-110
+                cursor-pointer
+                ${isLoading && 'hidden'}
+              `}
+            >
+              <img src={IconPencil} alt="Edit" />
             </div>
         </div>
         <ButtonAdd onClick={() => setShowModalAdd(true)}/>
       </div>
-      <div className="w-full mt-10">
+      <div className={`w-full h-72 flex justify-center items-center ${!isLoading && 'hidden'}`}>
+        <Loader/>
+      </div>
+      <div className={`w-full mt-10 ${isLoading && 'hidden'}`}>
         {
           items.length ?
             <div className="flex flex-col gap-4">
               {
-                items.map((item, index) => 
+                items.map((item) => 
                   <CardItem 
-                    key={index}
+                    key={item.id}
                     data={item}
                     onChange={handleUpdateCardItem}
                     onRemove={handleRemoveCardItem}
@@ -247,15 +262,29 @@ function Detail() {
       </div>
       {
         showModalAdd &&
-        <ModalAddItem onClose={handleModalClose} onSave={handleModalSave}/>
+        <ModalAddItem 
+          onClose={handleModalClose}
+          onSave={handleModalSave}
+          isLoading={isButtonLoading}
+        />
       }
       {
         showModalEdit &&
-        <ModalUpdateItem item={item} onClose={handleModalEditClose} onSave={handleModalEditSave}/>
+        <ModalUpdateItem
+          item={item}
+          onClose={handleModalEditClose}
+          onSave={handleModalEditSave}
+          isLoading={isButtonLoading}
+        />
       }
       {
         showAlert &&
-        <AlertRemove type="item" name={item?.title} onCancel={handleCancelAlert} onRemove={handleRemoveAlert}/>
+        <AlertRemove
+          type="item"
+          name={item?.title}
+          onCancel={handleCancelAlert}
+          onRemove={handleRemoveAlert}
+        />
       }
       {
         showInfo &&

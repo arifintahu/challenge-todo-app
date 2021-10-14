@@ -3,7 +3,10 @@ function ButtonRemove(props: { onClick: Function}) {
     props.onClick(event)
   }
   return (
-    <button onClick={handleClick} className="
+    <button
+      data-cy="button-remove"
+      onClick={handleClick}
+      className="
       bg-danger
       text-white
       rounded-3xl

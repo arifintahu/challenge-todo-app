@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import IconClose from '../assets/close.svg'
 import ButtonSave from './ButtonSave'
+import ButtonLoader from './ButtonLoader'
 import ResourcesPriority from '../resources/priority.json'
 
 function ModalUpdateItem(props: any) {
@@ -34,7 +35,9 @@ function ModalUpdateItem(props: any) {
   }
 
   return (
-    <div className="
+    <div
+    data-cy="modal-update-item"
+    className="
       absolute
       top-0
       left-0
@@ -93,7 +96,12 @@ function ModalUpdateItem(props: any) {
         </div>
         <div className="border-t-2 border-gray-200"/>
         <div className="px-5 py-3 flex justify-end">
-          <ButtonSave onClick={handleSave} disabled={isDisabled}/>
+          {
+            props.isLoading ?
+            <ButtonLoader /> :
+            <ButtonSave onClick={handleSave} disabled={isDisabled}/>
+            
+          }
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ function AlertInfo(props: any) {
   }
 
   return (
-    <div onClick={handleClose} className="
+    <div data-cy="alert-info" onClick={handleClose} className="
       absolute
       top-0
       left-0

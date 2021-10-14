@@ -1,5 +1,3 @@
-import { useState } from "react"
-
 function ButtonSave(props: { onClick: Function, disabled: boolean}) {
   const { disabled } = props
   
@@ -8,6 +6,7 @@ function ButtonSave(props: { onClick: Function, disabled: boolean}) {
   }
   return (
     <button 
+      data-cy="button-save"
       onClick={handleClick}
       disabled={props.disabled}
       className={

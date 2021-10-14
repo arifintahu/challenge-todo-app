@@ -1,7 +1,7 @@
 import IconTrash from '../assets/trash.svg'
 import IconPencil from '../assets/pencil.svg'
 import { ToDoItem } from '../interfaces'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ResourcesPriority from '../resources/priority.json'
 
 function CardItem(props: { 
@@ -38,8 +38,14 @@ function CardItem(props: {
     return result.color
   }
 
+  useEffect(() => {
+    setItem(props.data)
+  })
+
   return (
-    <div className="
+    <div
+    data-cy="card-item" 
+    className="
       bg-white
       rounded-xl
       p-5

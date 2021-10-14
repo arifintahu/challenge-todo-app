@@ -3,7 +3,10 @@ function ButtonCancel(props: { onClick: Function}) {
     props.onClick(event)
   }
   return (
-    <button onClick={handleClick} className="
+    <button 
+      data-cy="button-cancel"
+      onClick={handleClick}
+      className="
       bg-background
       text-title
       rounded-3xl

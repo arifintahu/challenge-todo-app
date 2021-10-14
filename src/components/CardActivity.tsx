@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Activity } from '../interfaces'
 import IconTrash from '../assets/trash.svg'
 import { removeActivity } from '../api/activity'
@@ -34,8 +34,14 @@ function CardActivity(props:
       props.onClick(activity.id)
     }
 
+    useEffect(() => {
+      setActivity(props.data)
+    })
+
     return (
-      <div className="
+      <div
+      data-cy="card-activity" 
+      className="
         bg-white
         rounded-xl
         p-5

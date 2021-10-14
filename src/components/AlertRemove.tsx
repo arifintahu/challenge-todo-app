@@ -12,7 +12,7 @@ function AlertRemove(props: any) {
   }
 
   return (
-    <div className="
+    <div data-cy="alert-remove" className="
       absolute
       top-0
       left-0

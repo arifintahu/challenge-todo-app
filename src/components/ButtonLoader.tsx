@@ -1,6 +1,8 @@
 function ButtonLoader() { 
   return (
-    <button className="
+    <button
+      data-cy="button-loader" 
+      className="
       bg-primary
       text-white
       rounded-3xl

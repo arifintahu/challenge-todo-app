@@ -8,7 +8,7 @@
     {
       "name": "High",
       "priority": "high",
-      "color": "bg-orange-500"
+      "color": "bg-yellow-500"
     },
     {
       "name": "Medium",
