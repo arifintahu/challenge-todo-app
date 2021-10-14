@@ -13,7 +13,7 @@
 
 body {
   margin: 0;
-  font-family: 'Poppins', 'Segoe UI', 'Roboto', 'sans-serif';
+  font-family: 'Poppins', 'sans-serif';
   background-color: var(--color-background);
   color: var(--color-title);
   -webkit-font-smoothing: antialiased;
