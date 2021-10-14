@@ -2,10 +2,9 @@ import { useState } from 'react';
 import IconClose from '../assets/close.svg';
 import ButtonSave from './ButtonSave';
 import ButtonLoader from './ButtonLoader';
-import ResourcesPriority from '../resources/priority.json';
+import DropdownPriority from './DropdownPriority';
 
 function ModalUpdateItem(props: any) {
-  const [priorities, setPriorities] = useState<Array<any>>(ResourcesPriority.data);
   const [priority, setPriority] = useState<string>(props.item.priority);
   const [title, setTitle] = useState<string>(props.item.title);
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
@@ -14,17 +13,18 @@ function ModalUpdateItem(props: any) {
     props.onClose(false);
   }
 
-  function handleSelect(e: any) {
-    setPriority(e.target.value);
+  function handleSelect(val: string) {
+    setPriority(val);
+    setIsDisabled(!val || !title);
   }
 
   function handleTitle(e: any) {
     setTitle(e.target.value);
-    setIsDisabled(e.target.value == '');
+    setIsDisabled(!priority || !e.target.value);
   }
 
   function handleSave() {
-    if (priority && title) {
+    if (!!priority && !!title) {
       props.onSave({
         id: props.item.id,
         title: title,
@@ -86,17 +86,7 @@ function ModalUpdateItem(props: any) {
           </div>
           <div className="flex flex-col gap-2">
             <div className="uppercase font-bold text-xs">Priority</div>
-            <select
-              className="w-40 border border-gray-200 p-2"
-              value={priority}
-              onChange={handleSelect}
-            >
-              {priorities.map((value, index) => (
-                <option key={index} value={value.priority}>
-                  {value.name}
-                </option>
-              ))}
-            </select>
+            <DropdownPriority onChange={handleSelect} />
           </div>
         </div>
         <div className="border-t-2 border-gray-200" />
