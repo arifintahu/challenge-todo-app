@@ -191,7 +191,7 @@ function Detail() {
   }, []);
 
   return (
-    <div className="mt-5">
+    <div data-cy="view-detail" className="mt-5">
       <div className="flex justify-between items-center">
         <div
           onMouseLeave={handleUpdateActivityDone}
@@ -215,6 +215,7 @@ function Detail() {
                       bg-transparent
                       border-gray-700
                       border-b-2
+                      lg:w-80
                       focus:outline-none
                     "
               onChange={handleUpdateTitle}

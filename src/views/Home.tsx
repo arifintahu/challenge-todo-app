@@ -91,7 +91,7 @@ function Home() {
   }, []);
 
   return (
-    <div className="mt-5">
+    <div data-cy="view-home" className="mt-5">
       <div className="flex justify-between items-center">
         <div className="font-bold text-lg lg:text-xl">Activity</div>
         {isAddLoading ? (
