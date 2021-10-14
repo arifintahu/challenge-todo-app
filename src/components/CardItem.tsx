@@ -22,7 +22,7 @@ function CardItem(props: {
       activity_group_id: item.activity_group_id,
       is_active: item.is_active == 1 ? 0 : 1
     };
-    console.log(newItem)
+    console.log(newItem);
     setItem(newItem);
     props.onChange(newItem);
   }

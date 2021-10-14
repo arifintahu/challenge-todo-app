@@ -170,7 +170,7 @@ function Detail() {
 
   function detailActivity() {
     setIsLoading(true);
-    setItems([])
+    setItems([]);
     if (params?.id) {
       getDetailActivity(params.id)
         .then((response) => {
