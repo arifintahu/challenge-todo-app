@@ -13,7 +13,7 @@ import { ToDoItem } from '../interfaces';
 import AlertRemove from '../components/AlertRemove';
 import AlertInfo from '../components/AlertInfo';
 import Loader from '../components/Loader';
-import ButtonAdd from '../components/ButtonAdd';
+import ButtonAddTodo from '../components/ButtonAddTodo';
 import ModalAddItem from '../components/ModalAddItem';
 import ModalUpdateItem from '../components/ModalUpdateItem';
 import CardItem from '../components/CardItem';
@@ -99,6 +99,20 @@ function Detail() {
         });
         setItems(result);
         setSort('belum-selesai');
+        return;
+      }
+      case 'sudah-selesai': {
+        const result = items.sort((a, b) => {
+          if (a.is_active == 0) {
+            return -1;
+          }
+          if (a.is_active == 1) {
+            return 1;
+          }
+          return 0;
+        });
+        setItems(result);
+        setSort('sudah-selesai');
         return;
       }
     }
@@ -274,7 +288,7 @@ function Detail() {
           "
         >
           <Link to="/">
-            <img src={IconArrowLeft} alt="Back" />
+            <img data-cy="todo-back-button" src={IconArrowLeft} alt="Back" />
           </Link>
           {isActivityUpdate ? (
             <input
@@ -290,10 +304,11 @@ function Detail() {
               onChange={handleUpdateTitle}
             ></input>
           ) : (
-            <div>{title}</div>
+            <div data-cy="todo-title">{title}</div>
           )}
 
           <div
+            data-cy="todo-title-edit-button"
             onClick={() => setIsActivityUpdate(true)}
             className={`
                 transform
@@ -308,7 +323,7 @@ function Detail() {
         </div>
         <div className={`flex gap-3 ${isLoading && 'hidden'}`}>
           <FilterItem onUpdate={handleFilter} />
-          <ButtonAdd onClick={() => setShowModalAdd(true)} />
+          <ButtonAddTodo onClick={() => setShowModalAdd(true)} />
         </div>
       </div>
       <div className={`w-full h-72 flex justify-center items-center ${!isLoading && 'hidden'}`}>
@@ -328,7 +343,7 @@ function Detail() {
             ))}
           </div>
         ) : (
-          <div className="flex justify-center mt-10">
+          <div data-cy="todo-empty-state" className="flex justify-center mt-10">
             <img className="max-w-lg" src={ImageNewItem} alt="New Item" />
           </div>
         )}

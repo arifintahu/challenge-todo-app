@@ -7,7 +7,7 @@ function AlertInfo(props: any) {
 
   return (
     <div
-      data-cy="alert-info"
+      data-cy="modal-information"
       onClick={handleClose}
       className="
       absolute
@@ -33,10 +33,10 @@ function AlertInfo(props: any) {
       "
       >
         <div className="px-5 py-5 flex gap-3">
-          <div>
+          <div data-cy="modal-information-icon">
             <img src={IconInfo} alt="Info" />
           </div>
-          <div>{props.msg}</div>
+          <div data-cy="modal-information-title">{props.msg}</div>
         </div>
       </div>
     </div>

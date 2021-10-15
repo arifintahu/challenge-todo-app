@@ -34,7 +34,7 @@ function ModalAddItem(props: any) {
 
   return (
     <div
-      data-cy="modal-add-item"
+      data-cy="modal-add"
       className="
       absolute
       top-0
@@ -57,8 +57,11 @@ function ModalAddItem(props: any) {
       "
       >
         <div className="flex justify-between px-5 py-3">
-          <div className="font-bold">Tambah List Item</div>
+          <div data-cy="modal-add-title" className="font-bold">
+            Tambah List Item
+          </div>
           <div
+            data-cy="modal-add-close-button"
             onClick={handleClose}
             className="
             transform
@@ -73,8 +76,11 @@ function ModalAddItem(props: any) {
         <div className="border-t-2 border-gray-200" />
         <div className="p-5 flex flex-col gap-5">
           <div className="flex flex-col gap-2">
-            <div className="uppercase font-bold text-xs">Nama List Item</div>
+            <div data-cy="modal-add-name-title" className="uppercase font-bold text-xs">
+              Nama List Item
+            </div>
             <input
+              data-cy="modal-add-name-input"
               className="w-full border border-gray-200 p-2"
               type="text"
               placeholder="Tambahkan nama list item"
@@ -83,12 +89,14 @@ function ModalAddItem(props: any) {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <div className="uppercase font-bold text-xs">Priority</div>
+            <div data-cy="modal-add-priority-title" className="uppercase font-bold text-xs">
+              Priority
+            </div>
             <DropdownPriority onChange={handleSelect} />
           </div>
         </div>
         <div className="border-t-2 border-gray-200" />
-        <div className="px-5 py-3 flex justify-end">
+        <div data-cy="modal-add-save-button" className="px-5 py-3 flex justify-end">
           {props.isLoading ? (
             <ButtonLoader />
           ) : (

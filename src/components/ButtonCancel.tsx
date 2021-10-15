@@ -4,7 +4,7 @@ function ButtonCancel(props: { onClick: Function }) {
   }
   return (
     <button
-      data-cy="button-cancel"
+      data-cy="modal-delete-cancel-button"
       onClick={handleClick}
       className="
       bg-background

@@ -26,7 +26,7 @@ function CardActivity(props: { data: Activity; onRemove: Function; onClick: Func
 
   return (
     <div
-      data-cy="card-activity"
+      data-cy="activity-item"
       className="
         bg-white
         rounded-xl
@@ -44,7 +44,11 @@ function CardActivity(props: { data: Activity; onRemove: Function; onClick: Func
           h-full
         "
       >
-        <div onClick={handleClick} className="font-bold h-full cursor-pointer">
+        <div
+          data-cy="activity-item-title"
+          onClick={handleClick}
+          className="font-bold h-full cursor-pointer"
+        >
           {activity.title}
         </div>
         <div
@@ -55,8 +59,9 @@ function CardActivity(props: { data: Activity; onRemove: Function; onClick: Func
             text-sm
           "
         >
-          <div>{getDate(activity.created_at)}</div>
+          <div data-cy="activity-item-date">{getDate(activity.created_at)}</div>
           <div
+            data-cy="activity-item-delete-button"
             onClick={handleRemove}
             className="
               transform

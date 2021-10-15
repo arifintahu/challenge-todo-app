@@ -13,7 +13,7 @@ function AlertRemove(props: any) {
 
   return (
     <div
-      data-cy="alert-remove"
+      data-cy="modal-delete"
       className="
       absolute
       top-0
@@ -38,10 +38,10 @@ function AlertRemove(props: any) {
       "
       >
         <div className="px-10 py-10 flex flex-col items-center">
-          <div>
+          <div data-cy="modal-delete-icon">
             <img src={IconAlert} alt="Alert" />
           </div>
-          <div className="mb-10 text-center">
+          <div data-cy="modal-delete-title" className="mb-10 text-center">
             Apakah anda yakin menghapus {props.type}
             <span className="font-bold"> "{props.name}"?</span>
           </div>

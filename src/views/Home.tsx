@@ -93,12 +93,10 @@ function Home() {
   return (
     <div data-cy="view-home" className="mt-5">
       <div className="flex justify-between items-center">
-        <div className="font-bold text-lg lg:text-xl">Activity</div>
-        {isAddLoading ? (
-          <ButtonLoader />
-        ) : (
-          <ButtonAdd onClick={handleAddActivity} data-cy="button-add-activity" />
-        )}
+        <div data-cy="activity-title" className="font-bold text-lg lg:text-xl">
+          Activity
+        </div>
+        {isAddLoading ? <ButtonLoader /> : <ButtonAdd onClick={handleAddActivity} />}
       </div>
       <div className={`w-full h-72 flex justify-center items-center ${!isLoading && 'hidden'}`}>
         <Loader />
@@ -117,7 +115,7 @@ function Home() {
             ))}
           </div>
         ) : (
-          <div className="flex justify-center mt-10">
+          <div data-cy="activity-empty-state" className="flex justify-center mt-10">
             <img className="max-w-lg" src={ImageActivity} alt="New Activity" />
           </div>
         )}
