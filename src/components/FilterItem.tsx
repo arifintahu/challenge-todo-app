@@ -34,6 +34,11 @@ function FilterItem(props: { onUpdate: Function }) {
       name: 'Belum Selesai',
       value: 'belum-selesai',
       icon: IconSortSelectionDown
+    },
+    {
+      name: 'Sudah Selesai',
+      value: 'sudah-selesai',
+      icon: IconSortSelectionDown
     }
   ]);
 
@@ -52,8 +57,9 @@ function FilterItem(props: { onUpdate: Function }) {
   }
 
   return (
-    <div data-cy="filter-item" className="relative">
+    <div className="relative">
       <div
+        data-cy="todo-sort-button"
         onClick={handleShowItems}
         className="
           border
@@ -70,6 +76,7 @@ function FilterItem(props: { onUpdate: Function }) {
         <img src={IconArrowSort} alt="sort" />
       </div>
       <div
+        data-cy="sort-parent"
         className={`
         absolute
         top-12
@@ -85,6 +92,7 @@ function FilterItem(props: { onUpdate: Function }) {
           <div
             key={index}
             onClick={() => handleSelected(item.value)}
+            data-cy="sort-selection"
             className="
               p-3
               flex
@@ -97,11 +105,11 @@ function FilterItem(props: { onUpdate: Function }) {
             "
           >
             <div className="flex gap-3">
-              <img src={item.icon} alt={item.value} />
-              <div>{item.name}</div>
+              <img data-cy="sort-selection-icon" src={item.icon} alt={item.value} />
+              <div data-cy="sort-selection-title">{item.name}</div>
             </div>
             <div className={`${isSelected(item.value) && 'hidden'}`}>
-              <img src={IconSortSelected} alt="terpilih" />
+              <img data-cy="sort-selection-selected" src={IconSortSelected} alt="terpilih" />
             </div>
           </div>
         ))}

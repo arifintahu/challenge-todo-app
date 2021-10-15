@@ -45,7 +45,7 @@ function CardItem(props: {
 
   return (
     <div
-      data-cy="card-item"
+      data-cy="todo-item"
       className="
       bg-white
       rounded-xl
@@ -59,6 +59,7 @@ function CardItem(props: {
       <div className="flex gap-3 items-center">
         <div>
           <input
+            data-cy="todo-item-checkbox"
             className="transform scale-150"
             type="checkbox"
             defaultChecked={item.is_active == 0}
@@ -66,14 +67,20 @@ function CardItem(props: {
           />
         </div>
         <div>
-          <div className={`rounded-full w-3 h-3 ${priorityToColor(item.priority)}`}></div>
+          <div
+            data-cy="todo-item-priority-indicator"
+            className={`rounded-full w-3 h-3 ${priorityToColor(item.priority)}`}
+          ></div>
         </div>
         {item.is_active ? (
-          <div className="font-medium">{item.title}</div>
+          <div data-cy="todo-item-title" className="font-medium">
+            {item.title}
+          </div>
         ) : (
           <div className="line-through text-gray-400">{item.title}</div>
         )}
         <div
+          data-cy="todo-item-edit-button"
           onClick={handleEdit}
           className="
           transform
@@ -86,6 +93,7 @@ function CardItem(props: {
         </div>
       </div>
       <div
+        data-cy="todo-item-delete-button"
         onClick={handleRemove}
         className="
         transform

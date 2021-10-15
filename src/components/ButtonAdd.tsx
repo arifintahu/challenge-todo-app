@@ -5,7 +5,7 @@ function ButtonAdd(props: { onClick: Function }) {
 
   return (
     <button
-      data-cy="button-add"
+      data-cy="activity-add-button"
       onClick={handleClick}
       className="
       bg-primary

@@ -1,7 +1,7 @@
 function Navbar() {
   return (
     <div
-      data-cy="navbar"
+      data-cy="header-background"
       className="
         w-full
         py-5
@@ -14,6 +14,7 @@ function Navbar() {
       "
     >
       <div
+        data-cy="header-title"
         className="
           px-5
           w-full

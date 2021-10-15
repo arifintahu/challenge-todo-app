@@ -4,7 +4,7 @@ function ButtonRemove(props: { onClick: Function }) {
   }
   return (
     <button
-      data-cy="button-remove"
+      data-cy="modal-delete-confirm-button"
       onClick={handleClick}
       className="
       bg-danger
