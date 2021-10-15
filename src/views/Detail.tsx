@@ -17,9 +17,11 @@ import ButtonAdd from '../components/ButtonAdd';
 import ModalAddItem from '../components/ModalAddItem';
 import ModalUpdateItem from '../components/ModalUpdateItem';
 import CardItem from '../components/CardItem';
+import FilterItem from '../components/FilterItem';
 
 function Detail() {
   const [title, setTitle] = useState<string>('');
+  const [sort, setSort] = useState<string>('');
   const [isActivityUpdate, setIsActivityUpdate] = useState<boolean>(false);
   const [items, setItems] = useState<ToDoItem[]>([]);
   const [item, setItem] = useState<ToDoItem>();
@@ -33,6 +35,73 @@ function Detail() {
 
   function handleUpdateTitle(e: any) {
     setTitle(e.target.value);
+  }
+
+  function handleFilter(value: string) {
+    switch (value) {
+      case 'terbaru': {
+        const result = items.sort((a, b) => {
+          return b.id - a.id;
+        });
+        setItems(result);
+        setSort('terbaru');
+        return;
+      }
+      case 'terlama': {
+        const result = items.sort((a, b) => {
+          return a.id - b.id;
+        });
+        setItems(result);
+        setSort('terlama');
+        return;
+      }
+      case 'az': {
+        const result = items.sort((a, b) => {
+          let x = a.title.toLowerCase();
+          let y = b.title.toLowerCase();
+          if (x < y) {
+            return -1;
+          }
+          if (x > y) {
+            return 1;
+          }
+          return 0;
+        });
+        setItems(result);
+        setSort('az');
+        return;
+      }
+      case 'za': {
+        const result = items.sort((a, b) => {
+          let x = b.title.toLowerCase();
+          let y = a.title.toLowerCase();
+          if (x < y) {
+            return -1;
+          }
+          if (x > y) {
+            return 1;
+          }
+          return 0;
+        });
+        setItems(result);
+        setSort('za');
+        return;
+      }
+      case 'belum-selesai': {
+        const result = items.sort((a, b) => {
+          if (a.is_active == 1) {
+            return -1;
+          }
+          if (a.is_active == 0) {
+            return 1;
+          }
+          return 0;
+        });
+        setItems(result);
+        setSort('belum-selesai');
+        return;
+      }
+    }
   }
 
   function handleUpdateActivityDone() {
@@ -142,7 +211,7 @@ function Detail() {
       })
         .then((response) => {
           if (response.status == 200) {
-            console.log('activity updated');
+            console.log('title updated');
           }
         })
         .catch((err) => {
@@ -160,7 +229,7 @@ function Detail() {
     updateItem(data)
       .then((response) => {
         if (response.status == 200) {
-          console.log('item updated');
+          detailActivity();
         }
       })
       .catch((err) => {
@@ -237,14 +306,17 @@ function Detail() {
             <img src={IconPencil} alt="Edit" />
           </div>
         </div>
-        <ButtonAdd onClick={() => setShowModalAdd(true)} />
+        <div className={`flex gap-3 ${isLoading && 'hidden'}`}>
+          <FilterItem onUpdate={handleFilter} />
+          <ButtonAdd onClick={() => setShowModalAdd(true)} />
+        </div>
       </div>
       <div className={`w-full h-72 flex justify-center items-center ${!isLoading && 'hidden'}`}>
         <Loader />
       </div>
       <div className={`w-full mt-10 ${isLoading && 'hidden'}`}>
         {items.length ? (
-          <div className="flex flex-col gap-4">
+          <div id={sort} className="flex flex-col gap-4">
             {items.map((item) => (
               <CardItem
                 key={item.id}
