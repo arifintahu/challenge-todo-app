@@ -12,9 +12,16 @@ function DropdownSimple(props: any) {
 
   return (
     <div>
-      <select data-cy="modal-add-priority-dropdown" className="w-40 border border-gray-200 p-2" value={priority} onChange={handleClickPriority}>
+      <select
+        data-cy="modal-add-priority-dropdown"
+        className="w-40 border border-gray-200 p-2"
+        value={priority}
+        onChange={handleClickPriority}
+      >
         {priorities.map((value, index) => (
-          <option data-cy="modal-add-priority-item" key={index} value={value.priority}>{value.name}</option>
+          <option data-cy="modal-add-priority-item" key={index} value={value.priority}>
+            {value.name}
+          </option>
         ))}
       </select>
     </div>
