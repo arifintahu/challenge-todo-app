@@ -3,6 +3,7 @@ import IconClose from '../assets/close.svg';
 import ButtonSave from './ButtonSave';
 import ButtonLoader from './ButtonLoader';
 import DropdownPriority from './DropdownPriority';
+import DropdownSimple from './DropdownSimple';
 
 function ModalUpdateItem(props: any) {
   const [priority, setPriority] = useState<string>(props.item.priority);
@@ -86,7 +87,8 @@ function ModalUpdateItem(props: any) {
           </div>
           <div className="flex flex-col gap-2">
             <div className="uppercase font-bold text-xs">Priority</div>
-            <DropdownPriority onChange={handleSelect} />
+            {/* <DropdownPriority onChange={handleSelect} /> */}
+            <DropdownSimple onChange={handleSelect} />
           </div>
         </div>
         <div className="border-t-2 border-gray-200" />

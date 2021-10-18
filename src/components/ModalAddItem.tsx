@@ -3,9 +3,10 @@ import IconClose from '../assets/close.svg';
 import ButtonSave from './ButtonSave';
 import ButtonLoader from './ButtonLoader';
 import DropdownPriority from './DropdownPriority';
+import DropdownSimple from './DropdownSimple';
 
 function ModalAddItem(props: any) {
-  const [priority, setPriority] = useState<string>('');
+  const [priority, setPriority] = useState<string>('very-high');
   const [title, setTitle] = useState<string>('');
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
@@ -92,7 +93,8 @@ function ModalAddItem(props: any) {
             <div data-cy="modal-add-priority-title" className="uppercase font-bold text-xs">
               Priority
             </div>
-            <DropdownPriority onChange={handleSelect} />
+            {/* <DropdownPriority onChange={handleSelect} /> */}
+            <DropdownSimple onChange={handleSelect} />
           </div>
         </div>
         <div className="border-t-2 border-gray-200" />
