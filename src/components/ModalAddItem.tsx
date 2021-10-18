@@ -3,7 +3,7 @@ import IconClose from '../assets/close.svg';
 import ButtonSave from './ButtonSave';
 import ButtonLoader from './ButtonLoader';
 import DropdownPriority from './DropdownPriority';
-import DropdownSimple from './DropdownSimple';
+import DropdownSelect from './DropdownSelect';
 
 function ModalAddItem(props: any) {
   const [priority, setPriority] = useState<string>('very-high');
@@ -94,7 +94,7 @@ function ModalAddItem(props: any) {
               Priority
             </div>
             {/* <DropdownPriority onChange={handleSelect} /> */}
-            <DropdownSimple onChange={handleSelect} />
+            <DropdownSelect onChange={handleSelect} />
           </div>
         </div>
         <div className="border-t-2 border-gray-200" />
