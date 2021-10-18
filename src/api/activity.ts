@@ -1,12 +1,13 @@
 import request from '../lib/request';
 
 export function getActivities(): Promise<any> {
-  return request.get('/activity-groups');
+  return request.get('/activity-groups?email=miftahul97%40gmail.com');
 }
 
 export function createActivity(data: { title: string }): Promise<any> {
   return request.post('/activity-groups', {
-    title: data.title
+    title: data.title,
+    email: "miftahul97@gmail.com"
   });
 }
 
