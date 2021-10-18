@@ -87,8 +87,8 @@ function ModalUpdateItem(props: any) {
           </div>
           <div className="flex flex-col gap-2">
             <div className="uppercase font-bold text-xs">Priority</div>
-            <DropdownPriority onChange={handleSelect} />
-            {/* <DropdownSimple onChange={handleSelect} /> */}
+            {/* <DropdownPriority onChange={handleSelect} /> */}
+            <DropdownSimple onChange={handleSelect} />
           </div>
         </div>
         <div className="border-t-2 border-gray-200" />

@@ -15,6 +15,8 @@ function DropdownSimple(props: any) {
       <select
         data-cy="modal-add-priority-dropdown"
         className="w-40 border border-gray-200 p-2"
+        id="priority"
+        name="priority"
         value={priority}
         onChange={handleClickPriority}
       >
