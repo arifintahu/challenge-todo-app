@@ -24,9 +24,8 @@ function DropdownPriority(props: any) {
   }
 
   return (
-    <div className="relative">
+    <div data-cy="modal-add-priority-dropdown" id="dropdown" className="relative">
       <div
-        data-cy="modal-add-priority-dropdown"
         onClick={handleClickDropdown}
         className="
         w-48
