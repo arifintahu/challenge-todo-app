@@ -3,26 +3,31 @@
     {
       "name": "Very High",
       "priority": "very-high",
+      "value": "very-high",
       "color": "bg-red-500"
     },
     {
       "name": "High",
       "priority": "high",
+      "value": "high",
       "color": "bg-yellow-500"
     },
     {
       "name": "Medium",
       "priority": "normal",
+      "value": "normal",
       "color": "bg-green-500"
     },
     {
       "name": "Low",
       "priority": "low",
+      "value": "low",
       "color": "bg-blue-500"
     },
     {
       "name": "Very Low",
       "priority": "very-low",
+      "value": "very-low",
       "color": "bg-purple-500"
     }
   ]
