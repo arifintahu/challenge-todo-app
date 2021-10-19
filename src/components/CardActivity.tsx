@@ -60,7 +60,7 @@ function CardActivity(props: { data: Activity; onRemove: Function; onClick: Func
           "
         >
           <div data-cy="activity-item-date">{getDate(activity.created_at)}</div>
-          <img 
+          <img
             data-cy="activity-item-delete-button"
             className="
               transform
@@ -68,7 +68,10 @@ function CardActivity(props: { data: Activity; onRemove: Function; onClick: Func
               hover:scale-110
               cursor-pointer
             "
-            onClick={handleRemove} src={IconTrash} alt="Delete" />
+            onClick={handleRemove}
+            src={IconTrash}
+            alt="Delete"
+          />
           {/* <div
             data-cy="activity-item-delete-button"
             onClick={handleRemove}

@@ -92,26 +92,17 @@ function CardItem(props: {
           <img src={IconPencil} alt="Edit" />
         </div>
       </div>
-      <img data-cy="todo-item-delete-button"
-        onClick={handleRemove}
-        className="
-        transform
-        active:scale-100
-        hover:scale-110
-        cursor-pointer
-        " src={IconTrash} alt="Delete" />
-      {/* <div
+      <button
         data-cy="todo-item-delete-button"
         onClick={handleRemove}
         className="
-        transform
-        active:scale-100
-        hover:scale-110
-        cursor-pointer
+          transform
+          active:scale-100
+          hover:scale-110
         "
       >
         <img src={IconTrash} alt="Delete" />
-      </div> */}
+      </button>
     </div>
   );
 }
