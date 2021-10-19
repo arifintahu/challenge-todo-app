@@ -7,7 +7,7 @@ export function getActivities(): Promise<any> {
 export function createActivity(data: { title: string }): Promise<any> {
   return request.post('/activity-groups', {
     title: data.title,
-    email: "miftahul97@gmail.com"
+    email: 'miftahul97@gmail.com'
   });
 }
 
