@@ -1,8 +1,11 @@
 import IconAlert from '../assets/alert.svg';
 import ButtonCancel from './ButtonCancel';
 import ButtonRemove from './ButtonRemove';
+import { useState } from 'react';
 
 function AlertRemove(props: any) {
+  const [node, setNode]  = useState<any>(null);
+
   function handleCancel() {
     props.onCancel(false);
   }
@@ -11,8 +14,16 @@ function AlertRemove(props: any) {
     props.onRemove(true);
   }
 
+  function handleOutsideClick(e: any) {
+    console.log(e.target)
+    if (!node.contains(e.target)) {
+      props.onCancel(false);
+    }
+  }
+
   return (
     <div
+      onClick={handleOutsideClick}
       data-cy="modal-delete"
       className="
       absolute
@@ -29,6 +40,9 @@ function AlertRemove(props: any) {
     "
     >
       <div
+      ref={node => {
+        setNode(node)
+      }}
         className="
         bg-white
         rounded-lg
