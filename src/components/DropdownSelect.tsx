@@ -20,7 +20,7 @@ function DropdownSelect(props: any) {
 
   const DropdownIndicator = () => {
     return (
-      <div data-cy="modal-add-priority-dropdown m-2">
+      <div data-cy="modal-add-priority-dropdown" className="m-2">
         <img src={IconArrowDown} alt="choose" />
       </div>
     );
