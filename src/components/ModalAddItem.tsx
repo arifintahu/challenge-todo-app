@@ -35,6 +35,7 @@ function ModalAddItem(props: any) {
 
   return (
     <div
+      
       data-cy="modal-add"
       className="
       absolute
