@@ -56,7 +56,9 @@ function ModalAddItem(props: any) {
         rounded-lg
         shadow-md
         m-auto
-        w-96
+        w-full
+        md:w-3/4
+        lg:w-2/4
       "
       >
         <div className="flex justify-between px-5 py-3">
@@ -100,7 +102,7 @@ function ModalAddItem(props: any) {
           </div>
         </div>
         <div className="border-t-2 border-gray-200" />
-        <div data-cy="modal-add-save-button" className="px-5 py-3 flex justify-end">
+        <div className="px-5 py-3 flex justify-end">
           {props.isLoading ? (
             <ButtonLoader />
           ) : (

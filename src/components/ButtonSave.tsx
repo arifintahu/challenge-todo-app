@@ -6,7 +6,7 @@ function ButtonSave(props: { onClick: Function; disabled: boolean }) {
   }
   return (
     <button
-      data-cy="button-save"
+      data-cy="modal-add-save-button"
       onClick={handleClick}
       disabled={props.disabled}
       className={`
