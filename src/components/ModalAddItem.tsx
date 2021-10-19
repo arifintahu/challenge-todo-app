@@ -46,6 +46,8 @@ function ModalAddItem(props: any) {
       z-20
       bg-gray-700
       bg-opacity-25
+      flex
+      items-center
     "
     >
       <div
@@ -54,7 +56,7 @@ function ModalAddItem(props: any) {
         rounded-lg
         shadow-md
         m-auto
-        max-w-xl
+        w-96
       "
       >
         <div className="flex justify-between px-5 py-3">
