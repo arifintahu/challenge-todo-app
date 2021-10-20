@@ -33,6 +33,13 @@ function Detail() {
   const [isButtonLoading, setIsButtonLoading] = useState<boolean>(false);
   const params: any = useParams();
 
+  function handleUpdateActivity() {
+    if (isActivityUpdate) {
+      handleUpdateActivityDone();
+    } else {
+      setIsActivityUpdate(true);
+    }
+  }
   function handleUpdateTitle(e: any) {
     setTitle(e.target.value);
   }
@@ -304,12 +311,14 @@ function Detail() {
               onChange={handleUpdateTitle}
             ></input>
           ) : (
-            <div data-cy="todo-title">{title}</div>
+            <div onClick={() => setIsActivityUpdate(true)} data-cy="todo-title">
+              {title}
+            </div>
           )}
 
           <div
             data-cy="todo-title-edit-button"
-            onClick={() => setIsActivityUpdate(true)}
+            onClick={handleUpdateActivity}
             className={`
                 transform
                 active:scale-100
