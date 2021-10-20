@@ -110,7 +110,12 @@ function FilterItem(props: { onUpdate: Function }) {
               <div data-cy="sort-selection-title">{item.name}</div>
             </div>
             <div className={`${isSelected(item.value) && 'hidden'}`}>
-              <img loading="lazy" data-cy="sort-selection-selected" src={IconSortSelected} alt="terpilih" />
+              <img
+                loading="lazy"
+                data-cy="sort-selection-selected"
+                src={IconSortSelected}
+                alt="terpilih"
+              />
             </div>
           </button>
         ))}

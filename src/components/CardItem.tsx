@@ -56,15 +56,13 @@ function CardItem(props: {
     "
     >
       <div className="flex gap-3 items-center">
-        <div>
-          <input
-            data-cy="todo-item-checkbox"
-            className="transform scale-150"
-            type="checkbox"
-            defaultChecked={item.is_active == 0}
-            onChange={handleCheckbox}
-          />
-        </div>
+        <input
+          data-cy="todo-item-checkbox"
+          className="w-5 h-5 rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-offset-0 focus:ring-blue-200 focus:ring-opacity-50"
+          type="checkbox"
+          defaultChecked={item.is_active == 0}
+          onChange={handleCheckbox}
+        />
         <div>
           <div
             data-cy="todo-item-priority-indicator"
@@ -78,28 +76,11 @@ function CardItem(props: {
         ) : (
           <div className="line-through text-gray-400">{item.title}</div>
         )}
-        <div
-          data-cy="todo-item-edit-button"
-          onClick={handleEdit}
-          className="
-          transform
-          active:scale-100
-          hover:scale-110
-          cursor-pointer
-        "
-        >
+        <button data-cy="todo-item-edit-button" onClick={handleEdit}>
           <img src={IconPencil} alt="Edit" />
-        </div>
+        </button>
       </div>
-      <button
-        data-cy="todo-item-delete-button"
-        onClick={handleRemove}
-        className="
-          transform
-          active:scale-100
-          hover:scale-110
-        "
-      >
+      <button data-cy="todo-item-delete-button" onClick={handleRemove}>
         <img src={IconTrash} alt="Delete" />
       </button>
     </div>
