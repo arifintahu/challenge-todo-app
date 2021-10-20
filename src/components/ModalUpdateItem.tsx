@@ -4,6 +4,7 @@ import ButtonSave from './ButtonSave';
 import ButtonLoader from './ButtonLoader';
 import DropdownPriority from './DropdownPriority';
 import DropdownSimple from './DropdownSimple';
+import DropdownSelect from './DropdownSelect';
 
 function ModalUpdateItem(props: any) {
   const [priority, setPriority] = useState<string>(props.item.priority);
@@ -37,7 +38,7 @@ function ModalUpdateItem(props: any) {
 
   return (
     <div
-      data-cy="modal-update-item"
+      data-cy="modal-add"
       className="
       absolute
       top-0
@@ -48,6 +49,8 @@ function ModalUpdateItem(props: any) {
       z-20
       bg-gray-700
       bg-opacity-25
+      flex
+      items-center
     "
     >
       <div
@@ -56,12 +59,15 @@ function ModalUpdateItem(props: any) {
         rounded-lg
         shadow-md
         m-auto
-        max-w-xl
+        w-full
+        md:w-3/4
+        lg:w-2/4
       "
       >
         <div className="flex justify-between px-5 py-3">
-          <div className="font-bold">Update Item</div>
+          <div data-cy="modal-add-title" className="font-bold">Update Item</div>
           <div
+            data-cy="modal-add-close-button"
             onClick={handleClose}
             className="
             transform
@@ -76,8 +82,9 @@ function ModalUpdateItem(props: any) {
         <div className="border-t-2 border-gray-200" />
         <div className="p-5 flex flex-col gap-5">
           <div className="flex flex-col gap-2">
-            <div className="uppercase font-bold text-xs">Nama List Item</div>
+            <div data-cy="modal-add-name-title" className="uppercase font-bold text-xs">Nama List Item</div>
             <input
+              data-cy="modal-add-name-input"
               className="w-full border border-gray-200 p-2"
               type="text"
               placeholder="Tambahkan nama list item"
@@ -86,9 +93,9 @@ function ModalUpdateItem(props: any) {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <div className="uppercase font-bold text-xs">Priority</div>
+            <div data-cy="modal-add-priority-title" className="uppercase font-bold text-xs">Priority</div>
             {/* <DropdownPriority onChange={handleSelect} /> */}
-            <DropdownSimple onChange={handleSelect} />
+            <DropdownSelect onChange={handleSelect} />
           </div>
         </div>
         <div className="border-t-2 border-gray-200" />

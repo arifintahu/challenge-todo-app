@@ -76,13 +76,25 @@ function CardItem(props: {
         ) : (
           <div className="line-through text-gray-400">{item.title}</div>
         )}
-        <button data-cy="todo-item-edit-button" onClick={handleEdit}>
+        <img data-cy="todo-item-edit-button" onClick={handleEdit} className="
+              transform
+              active:scale-100
+              hover:scale-110
+              cursor-pointer
+            " src={IconPencil} alt="Edit" />
+        {/* <button data-cy="todo-item-edit-button" onClick={handleEdit}>
           <img src={IconPencil} alt="Edit" />
-        </button>
+        </button> */}
       </div>
-      <button data-cy="todo-item-delete-button" onClick={handleRemove}>
+      <img data-cy="todo-item-delete-button" onClick={handleRemove} className="
+              transform
+              active:scale-100
+              hover:scale-110
+              cursor-pointer
+            " src={IconTrash} alt="Delete" />
+      {/* <button data-cy="todo-item-delete-button" onClick={handleRemove}>
         <img src={IconTrash} alt="Delete" />
-      </button>
+      </button> */}
     </div>
   );
 }
