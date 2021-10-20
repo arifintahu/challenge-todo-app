@@ -15,7 +15,6 @@ function AlertRemove(props: any) {
   }
 
   function handleOutsideClick(e: any) {
-    console.log(e.target);
     if (!node.contains(e.target)) {
       props.onCancel(false);
     }

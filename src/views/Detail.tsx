@@ -31,6 +31,7 @@ function Detail() {
   const [showInfo, setShowInfo] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isButtonLoading, setIsButtonLoading] = useState<boolean>(false);
+  const [node, setNode] = useState<any>(null);
   const params: any = useParams();
 
   function handleUpdateActivity() {
@@ -166,6 +167,14 @@ function Detail() {
     }
   }
 
+  function handleOutsideClick(e: any) {
+    if (node) {
+      if (!node.contains(e.target) && isActivityUpdate) {
+        handleUpdateActivityDone();
+      }
+    }
+  }
+
   function handleRemoveAlert(value: boolean) {
     if (value && item?.id) {
       removeItem(item?.id)
@@ -250,7 +259,8 @@ function Detail() {
     updateItem(data)
       .then((response) => {
         if (response.status == 200) {
-          detailActivity();
+          // detailActivity();
+          console.log('true');
         }
       })
       .catch((err) => {
@@ -281,10 +291,9 @@ function Detail() {
   }, []);
 
   return (
-    <div data-cy="view-detail" className="mt-5">
+    <div onClick={handleOutsideClick} data-cy="view-detail" className="mt-5">
       <div className="flex justify-between items-center">
         <div
-          onMouseLeave={handleUpdateActivityDone}
           className="
             font-bold
             text-lg
@@ -299,6 +308,9 @@ function Detail() {
           </Link>
           {isActivityUpdate ? (
             <input
+              ref={(node) => {
+                setNode(node);
+              }}
               type="text"
               value={title}
               className="
