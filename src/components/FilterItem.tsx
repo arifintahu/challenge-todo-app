@@ -58,7 +58,7 @@ function FilterItem(props: { onUpdate: Function }) {
 
   return (
     <div className="relative">
-      <div
+      <button
         data-cy="todo-sort-button"
         onClick={handleShowItems}
         className="
@@ -74,7 +74,7 @@ function FilterItem(props: { onUpdate: Function }) {
       "
       >
         <img src={IconArrowSort} alt="sort" />
-      </div>
+      </button>
       <div
         data-cy="sort-parent"
         className={`
@@ -89,11 +89,12 @@ function FilterItem(props: { onUpdate: Function }) {
       `}
       >
         {items.map((item, index) => (
-          <div
+          <button
             key={index}
             onClick={() => handleSelected(item.value)}
             data-cy="sort-selection"
             className="
+              w-full
               p-3
               flex
               justify-between
@@ -105,14 +106,37 @@ function FilterItem(props: { onUpdate: Function }) {
             "
           >
             <div className="flex gap-3">
-              <img data-cy="sort-selection-icon" src={item.icon} alt={item.value} />
+              <img loading="lazy" data-cy="sort-selection-icon" src={item.icon} alt={item.value} />
               <div data-cy="sort-selection-title">{item.name}</div>
             </div>
             <div className={`${isSelected(item.value) && 'hidden'}`}>
-              <img data-cy="sort-selection-selected" src={IconSortSelected} alt="terpilih" />
+              <img loading="lazy" data-cy="sort-selection-selected" src={IconSortSelected} alt="terpilih" />
             </div>
-          </div>
+          </button>
         ))}
+        {/* <button
+          onClick={() => handleSelected("terbaru")}
+          data-cy="sort-selection"
+          className="
+            w-full
+            p-3
+            flex
+            justify-between
+            items-center
+            border-b
+            border-gray-200
+            cursor-pointer
+            hover:bg-gray-50
+          "
+        >
+          <div className="flex gap-3">
+            <img loading="lazy" data-cy="sort-selection-icon" src={IconSortSelectionDown} alt="icon" />
+            <div data-cy="sort-selection-title">Terbaru</div>
+          </div>
+          <div className={`${isSelected("terbaru") && 'hidden'}`}>
+            <img loading="lazy" data-cy="sort-selection-selected" src={IconSortSelected} alt="terpilih" />
+          </div>
+        </button> */}
       </div>
     </div>
   );
