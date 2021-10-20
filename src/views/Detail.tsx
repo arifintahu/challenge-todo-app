@@ -296,10 +296,10 @@ function Detail() {
         <div
           className="
             font-bold
-            text-lg
-            lg:text-xl
+            text-xl
+            lg:text-3xl
             flex
-            gap-1
+            gap-3
             items-center
           "
         >
@@ -314,12 +314,13 @@ function Detail() {
               type="text"
               value={title}
               className="
-                      bg-transparent
-                      border-gray-700
-                      border-b-2
-                      lg:w-80
-                      focus:outline-none
-                    "
+                text-3xl
+                bg-transparent
+                border-gray-700
+                border-b-2
+                lg:w-80
+                focus:outline-none
+              "
               onChange={handleUpdateTitle}
             ></input>
           ) : (
